@@ -83,59 +83,16 @@
             100% { transform: rotate(-45deg) scale(1); }
         }
 
-        .salutation {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: #c2185b;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .content {
-            font-size: 1.05rem;
-            margin-bottom: 20px;
-            text-align: justify;
-        }
-
-        .song-lyrics {
-            background-color: #fff0f5;
-            border-left: 3px solid #e91e63;
-            padding: 15px;
-            margin: 15px 0;
-            font-style: italic;
-            text-align: center;
-            font-size: 1rem;
-            color: #880e4f;
-        }
-
-        .closing {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.8rem;
-            color: #c2185b;
-            text-align: right;
-            margin-top: 20px;
-        }
-
-        .signature {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            color: #880e4f;
-            text-align: right;
-            margin-top: 5px;
-        }
-
-        /* Interactive Question Area */
+        /* Question Section First */
         .question-section {
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 2px dashed #f8bbd0;
+            margin-bottom: 20px;
         }
 
         .question-text {
             font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
+            font-size: 2.2rem;
             color: #ad1457;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .buttons-container {
@@ -177,17 +134,57 @@
             z-index: 999;
         }
 
-        .success-message {
+        /* Hidden Letter Body until Yes is pressed */
+        .letter-content-wrapper {
             display: none;
-            margin-top: 25px;
-            font-size: 1.5rem;
-            color: #c2185b;
+            text-align: left;
+            animation: fadeIn 1.2s forwards;
+            padding-top: 20px;
+            border-top: 2px dashed #f8bbd0;
+        }
+
+        .salutation {
             font-family: 'Dancing Script', cursive;
-            animation: fadeIn 1s forwards;
+            font-size: 2.2rem;
+            color: #c2185b;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .song-lyrics {
+            background-color: #fff0f5;
+            border-left: 3px solid #e91e63;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            text-align: center;
+            font-size: 1rem;
+            color: #880e4f;
+        }
+
+        .closing {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #c2185b;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #880e4f;
+            text-align: right;
+            margin-top: 5px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
@@ -199,46 +196,43 @@
             <!-- Animated Heart Icon -->
             <div class="heart"></div>
 
-            <!-- Letter Salutation -->
-            <div class="salutation">Hello Teh!</div>
-            
-            <!-- Main Content -->
-            <div class="content">
-                <p>Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, "Nababaliw na naman si anteh." Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!</p>
-                <br>
-                <p>Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, "Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?" Hahaha. So ayun, teh, I really hope magustuhan mo ito.</p>
-                <br>
-                <p>Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:</p>
-                
-                <div class="song-lyrics">
-                    "Hindi kita tatantanan hangga't<br>
-                    Wala pang tan-tan-tanan,<br>
-                    Tan-tan-tanan!<br>
-                    Sa hirap at ginhawa,<br>
-                    Sa lungkot at sa ligaya,<br>
-                    'Di kita tatantanan,<br>
-                    'Di kita tatantanan,<br>
-                    Sinta."
-                </div>
-
-                <p>Cringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.</p>
-            </div>
-
-            <div class="closing">Salamat sa Diyos at nakilala kita.</div>
-            <div class="signature">Dell</div>
-
-            <!-- Interactive Question Section -->
-            <div class="question-section" id="interactive-area">
-                <div class="question-text">Mag-e-date pa rin ba tayo? ❤️</div>
+            <!-- STEP 1: Question Shows First -->
+            <div class="question-section" id="question-area">
+                <div class="question-text">Mamimiss mo ba ako teh kung mawawala ako haha? ❤️</div>
                 
                 <div class="buttons-container">
                     <button class="btn" id="yes-btn" onclick="acceptLove()">Yes!</button>
                     <button class="btn" id="no-btn" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
                 </div>
+            </div>
 
-                <div class="success-message" id="success-msg">
-                    Yay! Sabi na nga ba 'di mo ako matatanggihan eh! 💖🥰
+            <!-- STEP 2: Letter Hidden Until "Yes" Clicked -->
+            <div class="letter-content-wrapper" id="letter-area">
+                <div class="salutation">Hello Teh!</div>
+                
+                <div class="content">
+                    <p>Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, "Nababaliw na naman si anteh." Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!</p>
+                    <br>
+                    <p>Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, "Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?" Hahaha. So ayun, teh, I really hope magustuhan mo ito.</p>
+                    <br>
+                    <p>Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:</p>
+                    
+                    <div class="song-lyrics">
+                        "Hindi kita tatantanan hangga't<br>
+                        Wala pang tan-tan-tanan,<br>
+                        Tan-tan-tanan!<br>
+                        Sa hirap at ginhawa,<br>
+                        Sa lungkot at sa ligaya,<br>
+                        'Di kita tatantanan,<br>
+                        'Di kita tatantanan,<br>
+                        Sinta."
+                    </div>
+
+                    <p>Cringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.</p>
                 </div>
+
+                <div class="closing">Salamat sa Diyos at nakilala kita.</div>
+                <div class="signature">Dell</div>
             </div>
         </div>
     </div>
@@ -266,13 +260,14 @@
         }
 
         function acceptLove() {
-            const successMsg = document.getElementById('success-msg');
-            const buttonsContainer = document.querySelector('.buttons-container');
+            const questionArea = document.getElementById('question-area');
+            const letterArea = document.getElementById('letter-area');
             const noBtn = document.getElementById('no-btn');
 
-            buttonsContainer.style.display = 'none';
+            // Hide question & buttons, show letter
+            questionArea.style.display = 'none';
             noBtn.style.display = 'none';
-            successMsg.style.display = 'block';
+            letterArea.style.display = 'block';
         }
     </script>
 
