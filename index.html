@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     
     <style>
         * {
@@ -27,26 +27,128 @@
             align-items: center;
             padding: 20px;
             overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Falling Hearts Animation */
+        .heart-particle {
+            position: fixed;
+            top: -10%;
+            color: #f48fb1;
+            font-size: 1.2rem;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
         }
 
         .container {
             width: 100%;
             max-width: 600px;
+            z-index: 2;
         }
 
-        .letter-card {
+        /* Envelope / Intro Screen */
+        .envelope-card {
+            background-color: #fffdf9;
+            padding: 50px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(233, 30, 99, 0.15);
+            border: 2px solid #f48fb1;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .envelope-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.25);
+        }
+
+        .envelope-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .envelope-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #c2185b;
+            margin-bottom: 10px;
+        }
+
+        .open-btn {
+            margin-top: 20px;
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .open-btn:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+
+        /* Main Card Container */
+        .main-card {
+            display: none;
             background-color: #fffdf9;
             padding: 40px 30px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
             border: 1px solid #f48fb1;
             position: relative;
             line-height: 1.8;
             color: #4a4a4a;
             text-align: center;
+            animation: fadeIn 1s forwards;
         }
 
-        /* Floating Animated Heart */
+        /* Audio Control Player Bar */
+        .music-player {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #fff0f5;
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #f8bbd0;
+            font-size: 0.9rem;
+            color: #c2185b;
+        }
+
+        .music-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* Pulsing Heart Icon */
         .heart {
             width: 40px;
             height: 40px;
@@ -67,15 +169,8 @@
             position: absolute;
         }
 
-        .heart::before {
-            top: -20px;
-            left: 0;
-        }
-
-        .heart::after {
-            left: 20px;
-            top: 0;
-        }
+        .heart::before { top: -20px; left: 0; }
+        .heart::after { left: 20px; top: 0; }
 
         @keyframes pulse {
             0% { transform: rotate(-45deg) scale(1); }
@@ -83,7 +178,7 @@
             100% { transform: rotate(-45deg) scale(1); }
         }
 
-        /* Question Section First */
+        /* Question Section */
         .question-section {
             margin-bottom: 20px;
         }
@@ -122,9 +217,7 @@
             z-index: 10;
         }
 
-        #yes-btn:hover {
-            background-color: #1b5e20;
-        }
+        #yes-btn:hover { background-color: #1b5e20; }
 
         #no-btn {
             background-color: #e53935;
@@ -134,7 +227,7 @@
             z-index: 999;
         }
 
-        /* Hidden Letter Body until Yes is pressed */
+        /* Hidden Letter Content Area */
         .letter-content-wrapper {
             display: none;
             text-align: left;
@@ -154,17 +247,34 @@
             font-size: 1.05rem;
             margin-bottom: 20px;
             text-align: justify;
+            white-space: pre-wrap;
+        }
+
+        /* Typewriter Caret Cursor */
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.1em;
+            background-color: #e91e63;
+            vertical-align: middle;
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
         }
 
         .song-lyrics {
             background-color: #fff0f5;
             border-left: 3px solid #e91e63;
             padding: 15px;
-            margin: 15px 0;
+            margin: 20px 0;
             font-style: italic;
             text-align: center;
             font-size: 1rem;
             color: #880e4f;
+            border-radius: 0 8px 8px 0;
         }
 
         .closing {
@@ -183,6 +293,58 @@
             margin-top: 5px;
         }
 
+        /* Interactive Reasons Why Section */
+        .reasons-section {
+            display: none;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #f8bbd0;
+            text-align: center;
+            animation: fadeIn 1s forwards;
+        }
+
+        .reasons-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ad1457;
+            margin-bottom: 15px;
+        }
+
+        .polaroid-card {
+            background-color: #ffffff;
+            padding: 20px 15px;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+            margin: 0 auto 15px auto;
+            max-width: 400px;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #333;
+            font-style: italic;
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid-card:hover {
+            transform: rotate(-1deg) scale(1.02);
+        }
+
+        .next-reason-btn {
+            background-color: #e91e63;
+            color: white;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(233, 30, 99, 0.2);
+        }
+
+        .next-reason-btn:hover { background-color: #c2185b; }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
@@ -191,12 +353,31 @@
 </head>
 <body>
 
+    <!-- Audio Player (Uses uploaded love.mp3) -->
+    <audio id="bg-music" loop preload="auto">
+        <source src="love.mp3" type="audio/mpeg">
+    </audio>
+
     <div class="container">
-        <div class="letter-card">
-            <!-- Animated Heart Icon -->
+        <!-- STEP 0: Open Me Envelope -->
+        <div class="envelope-card" id="envelope-screen" onclick="openEnvelope()">
+            <div class="envelope-icon">💌</div>
+            <div class="envelope-title">May Sulat Para Sa'yo</div>
+            <p style="color: #888; font-size: 0.95rem;">Tap to open with background music 🎵</p>
+            <button class="open-btn">Open Me</button>
+        </div>
+
+        <!-- STEP 1 & 2: Main Interactive Card -->
+        <div class="main-card" id="main-card">
+            <!-- Music Status Control Bar -->
+            <div class="music-player">
+                <button class="music-btn" id="music-toggle-btn" onclick="toggleMusic()">🔊</button>
+                <span id="music-status">Now Playing: Love - Wave To Earth 🎵</span>
+            </div>
+
             <div class="heart"></div>
 
-            <!-- STEP 1: Question Shows First -->
+            <!-- STEP 1: Question -->
             <div class="question-section" id="question-area">
                 <div class="question-text">Mamimiss mo ba ako teh kung mawawala ako haha? ❤️</div>
                 
@@ -206,38 +387,74 @@
                 </div>
             </div>
 
-            <!-- STEP 2: Letter Hidden Until "Yes" Clicked -->
+            <!-- STEP 2: Letter Content with Typewriter Effect -->
             <div class="letter-content-wrapper" id="letter-area">
                 <div class="salutation">Hello Teh!</div>
                 
-                <div class="content">
-                    <p>Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, "Nababaliw na naman si anteh." Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!</p>
-                    <br>
-                    <p>Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, "Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?" Hahaha. So ayun, teh, I really hope magustuhan mo ito.</p>
-                    <br>
-                    <p>Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:</p>
-                    
-                    <div class="song-lyrics">
-                        "Hindi kita tatantanan hangga't<br>
-                        Wala pang tan-tan-tanan,<br>
-                        Tan-tan-tanan!<br>
-                        Sa hirap at ginhawa,<br>
-                        Sa lungkot at sa ligaya,<br>
-                        'Di kita tatantanan,<br>
-                        'Di kita tatantanan,<br>
-                        Sinta."
-                    </div>
+                <div class="content"><span id="typewriter-text"></span><span class="cursor" id="typewriter-cursor"></span></div>
 
-                    <p>Cringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.</p>
+                <div class="song-lyrics" id="lyrics-box" style="display: none;">
+                    "Hindi kita tatantanan hangga't<br>
+                    Wala pang tan-tan-tanan,<br>
+                    Tan-tan-tanan!<br>
+                    Sa hirap at ginhawa,<br>
+                    Sa lungkot at sa ligaya,<br>
+                    'Di kita tatantanan,<br>
+                    'Di kita tatantanan,<br>
+                    Sinta."
                 </div>
 
-                <div class="closing">Salamat sa Diyos at nakilala kita.</div>
-                <div class="signature">Mhiema</div>
+                <div id="ending-part" style="display: none;">
+                    <div class="closing">Salamat sa Diyos at nakilala kita.</div>
+                    <div class="signature">Anteh</div>
+                </div>
+            </div>
+
+            <!-- Interactive Feature: Reasons Why I Like You -->
+            <div class="reasons-section" id="reasons-area">
+                <div class="reasons-title">✨ Reasons Why I Admiration You ✨</div>
+                <div class="polaroid-card" id="polaroid-text">
+                    Click the button below to see...
+                </div>
+                <button class="next-reason-btn" onclick="nextReason()">Show Reason 💖</button>
             </div>
         </div>
     </div>
 
     <script>
+        // Background Music Controls
+        const music = document.getElementById('bg-music');
+        let isPlaying = false;
+
+        function openEnvelope() {
+            document.getElementById('envelope-screen').style.display = 'none';
+            document.getElementById('main-card').style.display = 'block';
+            playMusic();
+        }
+
+        function playMusic() {
+            music.play().then(() => {
+                isPlaying = true;
+                document.getElementById('music-toggle-btn').innerText = '🔊';
+            }).catch(e => {
+                console.log("Audio play deferred:", e);
+                document.getElementById('music-status').innerText = 'Click 🔊 to play music';
+            });
+        }
+
+        function toggleMusic() {
+            if (isPlaying) {
+                music.pause();
+                isPlaying = false;
+                document.getElementById('music-toggle-btn').innerText = '🔇';
+            } else {
+                music.play();
+                isPlaying = true;
+                document.getElementById('music-toggle-btn').innerText = '🔊';
+            }
+        }
+
+        // Dodging No Button Effect
         let yesScale = 1;
 
         function dodgeNo() {
@@ -259,16 +476,86 @@
             yesBtn.style.transform = `scale(${yesScale})`;
         }
 
+        // Accept Yes & Start Typewriter Letter Reveal
         function acceptLove() {
-            const questionArea = document.getElementById('question-area');
-            const letterArea = document.getElementById('letter-area');
-            const noBtn = document.getElementById('no-btn');
-
-            // Hide question & buttons, show letter
-            questionArea.style.display = 'none';
-            noBtn.style.display = 'none';
-            letterArea.style.display = 'block';
+            document.getElementById('question-area').style.display = 'none';
+            document.getElementById('no-btn').style.display = 'none';
+            document.getElementById('letter-area').style.display = 'block';
+            
+            startTypewriter();
         }
+
+        // Typewriter Effect Data
+        const letterParagraphs = [
+            "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!\n\n",
+            "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, \"Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?\" Hahaha. So ayun, teh, I really hope magustuhan mo ito.\n\n",
+            "Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:\n\n"
+        ];
+
+        const postSongText = "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.";
+
+        function startTypewriter() {
+            const target = document.getElementById('typewriter-text');
+            let pIndex = 0;
+            let cIndex = 0;
+            const fullIntroText = letterParagraphs.join('');
+
+            function typeIntro() {
+                if (cIndex < fullIntroText.length) {
+                    target.textContent += fullIntroText.charAt(cIndex);
+                    cIndex++;
+                    setTimeout(typeIntro, 30);
+                } else {
+                    document.getElementById('lyrics-box').style.display = 'block';
+                    typePostSong();
+                }
+            }
+
+            let postIndex = 0;
+            function typePostSong() {
+                if (postIndex < postSongText.length) {
+                    target.textContent += postSongText.charAt(postIndex);
+                    postIndex++;
+                    setTimeout(typePostSong, 30);
+                } else {
+                    document.getElementById('typewriter-cursor').style.display = 'none';
+                    document.getElementById('ending-part').style.display = 'block';
+                    document.getElementById('reasons-area').style.display = 'block';
+                }
+            }
+
+            typeIntro();
+        }
+
+        // Reasons Why Deck
+        const reasons = [
+            "4 years na kitang paboritong pagmasdan at admire-in mula sa malayo ✨",
+            "Napakaganda mo palagi—sa paningin at sa puso ko 🌸",
+            "Kahit nai-stress kita minsan, hinding-hindi ako magagalit o maiinis sa'yo 🤍",
+            "Lagi lang akong nandito para makinig sa lahat ng problema mo anytime 🎧",
+            "I'll always wait and wish the absolute best for you, kahit ano pa mangyari ✨"
+        ];
+        let reasonIndex = 0;
+
+        function nextReason() {
+            const display = document.getElementById('polaroid-text');
+            display.innerText = `"${reasons[reasonIndex]}"`;
+            reasonIndex = (reasonIndex + 1) % reasons.length;
+        }
+
+        // Falling Hearts Generator
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
     </script>
 
 </body>
