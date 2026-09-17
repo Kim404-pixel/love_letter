@@ -272,7 +272,7 @@
             background-color: #fff0f5;
             border-left: 3px solid #e91e63;
             padding: 15px;
-            margin: 20px 0 10px 0;
+            margin: 20px 0 15px 0;
             font-style: italic;
             text-align: center;
             font-size: 1rem;
@@ -291,6 +291,7 @@
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            background-color: #000;
             animation: fadeIn 1s forwards;
         }
 
@@ -379,7 +380,7 @@
 </head>
 <body>
 
-    <!-- Audio Player with Direct GitHub Raw + Local Fallbacks -->
+    <!-- Audio Player -->
     <audio id="bg-music" loop preload="auto">
         <source src="love.mp3" type="audio/mpeg">
         <source src="https://raw.githubusercontent.com/wyndell404-pixel/love_letter/main/love.mp3" type="audio/mpeg">
@@ -433,9 +434,16 @@
                     Sinta."
                 </div>
 
-                <!-- Embedded YouTube Player Frame -->
+                <!-- Embedded YouTube Player Frame (Direct Embed Bypass) -->
                 <div class="youtube-container" id="yt-player-box">
-                    <iframe id="yt-iframe" src="" title="Antonio Bathan - Tantanan (Official Lyric Video)" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe 
+                        id="yt-iframe" 
+                        src="https://www.youtube-nocookie.com/embed/s6wXgtEIhCw" 
+                        title="Antonio Bathan - Tantanan (Official Lyric Video)" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen>
+                    </iframe>
                 </div>
 
                 <div id="ending-part" style="display: none;">
@@ -456,7 +464,7 @@
     </div>
 
     <script>
-        // Audio Controls with Auto Play Trigger
+        // Audio Controls
         const music = document.getElementById('bg-music');
         let isPlaying = false;
 
@@ -495,7 +503,7 @@
             }
         }
 
-        // Dodging No Button Effect with Dynamic Text inside Button
+        // Dodging No Button Effect
         let yesScale = 1;
         let sadTextIndex = 0;
 
@@ -513,11 +521,9 @@
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
 
-            // 1. Change text directly INSIDE the No Button
             noBtn.innerText = sadMessages[sadTextIndex];
             sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
 
-            // 2. Make NO button jump randomly within window bounds
             const padding = 60;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -529,14 +535,12 @@
             noBtn.style.left = `${randomX}px`;
             noBtn.style.top = `${randomY}px`;
 
-            // 3. Make YES button grow slightly bigger, but with a controlled MAX limit (up to scale 1.8)
             if (yesScale < 1.8) {
                 yesScale += 0.15;
                 yesBtn.style.transform = `scale(${yesScale})`;
             }
         }
 
-        // Accept Yes & Start Typewriter Letter Reveal
         function acceptLove() {
             document.getElementById('question-area').style.display = 'none';
             document.getElementById('no-btn').style.display = 'none';
@@ -565,17 +569,11 @@
                     cIndex++;
                     setTimeout(typeIntro, 30);
                 } else {
-                    // Show Lyrics Box & Embedded YouTube Frame
+                    // Pakita ang Lyrics Box at YouTube Frame
                     document.getElementById('lyrics-box').style.display = 'block';
-                    
-                    const ytBox = document.getElementById('yt-player-box');
-                    const ytIframe = document.getElementById('yt-iframe');
-                    ytBox.style.display = 'block';
-                    
-                    // Set YouTube Video URL (Tantanan by Antonio Bathan)
-                    ytIframe.src = "https://www.youtube.com/embed/s6wXgtEIhCw";
+                    document.getElementById('yt-player-box').style.display = 'block';
 
-                    // Pause background music automatically when video appears so audio won't overlap
+                    // Pause background music para hindi magkalat ang boses kapag in-play ang video
                     music.pause();
                     isPlaying = false;
                     document.getElementById('music-toggle-btn').innerText = '🔇';
