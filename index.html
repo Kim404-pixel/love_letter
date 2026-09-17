@@ -225,7 +225,6 @@
             background-color: #e53935;
             color: white;
             position: relative;
-            transition: left 0.15s ease, top 0.15s ease;
             z-index: 999;
             user-select: none;
         }
@@ -284,7 +283,7 @@
 
         /* Responsive YouTube Video Frame Container */
         .youtube-container {
-            display: none;
+            display: none; /* Naka-hide muna hanggang matapos ang intro text */
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -505,7 +504,7 @@
             }
         }
 
-        // Dodging No Button Effect with Screen Boundary Guarantee
+        // Dodging No Button Effect with strict safety margins
         let yesScale = 1;
         let sadTextIndex = 0;
 
@@ -526,14 +525,14 @@
             noBtn.innerText = sadMessages[sadTextIndex];
             sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
 
-            const btnWidth = noBtn.offsetWidth;
-            const btnHeight = noBtn.offsetHeight;
-            const padding = 20;
+            const btnWidth = noBtn.offsetWidth || 100;
+            const btnHeight = noBtn.offsetHeight || 50;
+            const margin = 30;
 
-            const minX = padding;
-            const maxX = window.innerWidth - btnWidth - padding;
-            const minY = padding;
-            const maxY = window.innerHeight - btnHeight - padding;
+            const minX = margin;
+            const maxX = window.innerWidth - btnWidth - margin;
+            const minY = margin;
+            const maxY = window.innerHeight - btnHeight - margin;
 
             const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
             const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
@@ -565,24 +564,21 @@
             const target = document.getElementById('typewriter-text');
             let cIndex = 0;
 
-            // Step 1: Type the introductory paragraphs up to the song introduction
             function typeIntro() {
                 if (cIndex < introText.length) {
                     target.textContent += introText.charAt(cIndex);
                     cIndex++;
                     setTimeout(typeIntro, 30);
                 } else {
-                    // Step 2: Show Lyrics Box & YouTube Frame EXPLICITLY here
+                    // Tahasang pina-pakita ang Lyrics Box at YouTube Container dito
                     document.getElementById('lyrics-box').style.display = 'block';
                     document.getElementById('yt-player-box').style.display = 'block';
 
-                    // Pause background music para hindi magpatong ang audio
                     music.pause();
                     isPlaying = false;
                     document.getElementById('music-toggle-btn').innerText = '🔇';
                     document.getElementById('music-status').innerText = 'Music Paused for Video 🎥';
 
-                    // Step 3: Proceed to type the remaining "Cringe na kung cringe..." text
                     let postIndex = 0;
                     function typePostSong() {
                         if (postIndex < postSongText.length) {
