@@ -187,19 +187,7 @@
             font-family: 'Dancing Script', cursive;
             font-size: 2.2rem;
             color: #ad1457;
-            margin-bottom: 15px;
-        }
-
-        /* Dynamic Sad/Playful Text Box */
-        .sad-msg-box {
-            font-size: 1.1rem;
-            color: #d81b60;
-            font-weight: 600;
-            min-height: 32px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.5rem;
+            margin-bottom: 25px;
         }
 
         .buttons-container {
@@ -207,7 +195,7 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            min-height: 100px;
+            min-height: 120px;
             position: relative;
         }
 
@@ -221,12 +209,14 @@
             font-weight: bold;
             transition: transform 0.2s ease, background-color 0.2s ease;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            white-space: nowrap;
         }
 
         #yes-btn {
             background-color: #2e7d32;
             color: white;
             z-index: 10;
+            max-width: 90vw;
         }
 
         #yes-btn:hover { background-color: #1b5e20; }
@@ -395,7 +385,6 @@
             <!-- STEP 1: Question -->
             <div class="question-section" id="question-area">
                 <div class="question-text">Mamimiss mo ba ako teh kung mawawala ako haha? ❤️</div>
-                <div class="sad-msg-box" id="sad-text"></div>
                 
                 <div class="buttons-container">
                     <button class="btn" id="yes-btn" onclick="acceptLove()">Yes!</button>
@@ -477,26 +466,26 @@
             }
         }
 
-        // Dodging No Button Effect with Dynamic Sad Texts
+        // Dodging No Button Effect with Dynamic Text inside Button
         let yesScale = 1;
         let sadTextIndex = 0;
 
         const sadMessages = [
-            "Nooo say yes pleasee keiiiz! 🥺",
-            "Aww, don't be like that! 💔",
-            "Are you really sure? Try again! 😭",
-            "Wrong button! Try the green one! 😜",
-            "Huuu, masakit 'yan teh ah! 🥺👉👈",
-            "Bawal mag-No! Click YES na lang! 💖"
+            "No 🥺",
+            "Are you sure? 💔",
+            "Try again! 😭",
+            "Click YES na lang! 😜",
+            "Bawal mag-No! 🥺👉👈",
+            "Weh, talaga ba? 💖",
+            "Mali yang napipindot mo! 😂"
         ];
 
         function dodgeNo() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
-            const sadText = document.getElementById('sad-text');
 
-            // 1. Show Sad / Playful Text Message
-            sadText.innerText = sadMessages[sadTextIndex];
+            // 1. Change text directly INSIDE the No Button
+            noBtn.innerText = sadMessages[sadTextIndex];
             sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
 
             // 2. Make NO button jump randomly within window bounds
@@ -511,9 +500,11 @@
             noBtn.style.left = `${randomX}px`;
             noBtn.style.top = `${randomY}px`;
 
-            // 3. Make YES button grow bigger each try!
-            yesScale += 0.35;
-            yesBtn.style.transform = `scale(${yesScale})`;
+            // 3. Make YES button grow slightly bigger, but with a controlled MAX limit (up to scale 1.8)
+            if (yesScale < 1.8) {
+                yesScale += 0.15;
+                yesBtn.style.transform = `scale(${yesScale})`;
+            }
         }
 
         // Accept Yes & Start Typewriter Letter Reveal
@@ -527,9 +518,9 @@
 
         // Typewriter Effect Data
         const letterParagraphs = [
-            "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!\n\n",
-            "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, \"Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?\" Hahaha. So ayun, teh, I really hope magustuhan mo ito.\n\n",
-            "Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:\n\n"
+            "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na teh, Yung time na naging uncomfortable ka na kasama ako especially birthday mo yun, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!\n\n",
+            "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, \"Unang araw palang minahal na kita, bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope magustuhan mo ito.\n\n",
+            "Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa ko ay, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:\n\n"
         ];
 
         const postSongText = "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.";
@@ -572,10 +563,9 @@
             "Napakaganda mo palagi—sa paningin at sa puso ko 🌸",
             "Kahit feeling mo hagard ka na teh maganda ka parin sa paningin ko",
             "Lagi lang akong nandito para makinig sa lahat ng problema mo anytime 🎧",
-            "I'll always wait and wish the absolute best for you, kahit ano pa mangyari ✨"
-            "Gusto ko buong pagkatao mo teh"
+            "I'll always wait and wish the absolute best for you, kahit ano pa mangyari ✨",
+            "Gusto ko buong pagkatao mo teh",
             "Hindi mo man ako gusto basta alam ko gusto kita at wala ng iba"
-
         ];
         let reasonIndex = 0;
 
@@ -594,3 +584,11 @@
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             heart.style.fontSize = Math.random() * 10 + 15 + 'px';
             document.body.appendChild(heart);
+
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html>
