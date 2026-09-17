@@ -187,7 +187,19 @@
             font-family: 'Dancing Script', cursive;
             font-size: 2.2rem;
             color: #ad1457;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
+        }
+
+        /* Dynamic Sad/Playful Text Box */
+        .sad-msg-box {
+            font-size: 1.1rem;
+            color: #d81b60;
+            font-weight: 600;
+            min-height: 32px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
         }
 
         .buttons-container {
@@ -195,7 +207,7 @@
             justify-content: center;
             align-items: center;
             gap: 20px;
-            min-height: 80px;
+            min-height: 100px;
             position: relative;
         }
 
@@ -223,8 +235,9 @@
             background-color: #e53935;
             color: white;
             position: relative;
-            transition: all 0.2s ease-out;
+            transition: left 0.2s ease, top 0.2s ease, transform 0.2s ease;
             z-index: 999;
+            user-select: none;
         }
 
         /* Hidden Letter Content Area */
@@ -353,9 +366,11 @@
 </head>
 <body>
 
-    <!-- Audio Player (Uses uploaded love.mp3) -->
+    <!-- Audio Player with Direct GitHub Raw + Local Fallbacks -->
     <audio id="bg-music" loop preload="auto">
         <source src="love.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/wyndell404-pixel/love_letter/main/love.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
@@ -380,10 +395,11 @@
             <!-- STEP 1: Question -->
             <div class="question-section" id="question-area">
                 <div class="question-text">Mamimiss mo ba ako teh kung mawawala ako haha? ❤️</div>
+                <div class="sad-msg-box" id="sad-text"></div>
                 
                 <div class="buttons-container">
                     <button class="btn" id="yes-btn" onclick="acceptLove()">Yes!</button>
-                    <button class="btn" id="no-btn" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+                    <button class="btn" id="no-btn" onmouseover="dodgeNo()" onclick="dodgeNo()" ontouchstart="dodgeNo()">No</button>
                 </div>
             </div>
 
@@ -406,7 +422,7 @@
 
                 <div id="ending-part" style="display: none;">
                     <div class="closing">Salamat sa Diyos at nakilala kita.</div>
-                    <div class="signature">Anteh</div>
+                    <div class="signature">Mhiema</div>
                 </div>
             </div>
 
@@ -422,7 +438,7 @@
     </div>
 
     <script>
-        // Background Music Controls
+        // Audio Controls with Auto Play Trigger
         const music = document.getElementById('bg-music');
         let isPlaying = false;
 
@@ -433,13 +449,19 @@
         }
 
         function playMusic() {
-            music.play().then(() => {
-                isPlaying = true;
-                document.getElementById('music-toggle-btn').innerText = '🔊';
-            }).catch(e => {
-                console.log("Audio play deferred:", e);
-                document.getElementById('music-status').innerText = 'Click 🔊 to play music';
-            });
+            music.volume = 0.8;
+            const playPromise = music.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    isPlaying = true;
+                    document.getElementById('music-toggle-btn').innerText = '🔊';
+                    document.getElementById('music-status').innerText = 'Now Playing: Love - Wave To Earth 🎵';
+                }).catch(e => {
+                    console.log("Audio play error:", e);
+                    document.getElementById('music-status').innerText = 'Click 🔊 button to enable music';
+                });
+            }
         }
 
         function toggleMusic() {
@@ -448,20 +470,37 @@
                 isPlaying = false;
                 document.getElementById('music-toggle-btn').innerText = '🔇';
             } else {
-                music.play();
-                isPlaying = true;
-                document.getElementById('music-toggle-btn').innerText = '🔊';
+                music.play().then(() => {
+                    isPlaying = true;
+                    document.getElementById('music-toggle-btn').innerText = '🔊';
+                });
             }
         }
 
-        // Dodging No Button Effect
+        // Dodging No Button Effect with Dynamic Sad Texts
         let yesScale = 1;
+        let sadTextIndex = 0;
+
+        const sadMessages = [
+            "Nooo say yes pleasee keiiiz! 🥺",
+            "Aww, don't be like that! 💔",
+            "Are you really sure? Try again! 😭",
+            "Wrong button! Try the green one! 😜",
+            "Huuu, masakit 'yan teh ah! 🥺👉👈",
+            "Bawal mag-No! Click YES na lang! 💖"
+        ];
 
         function dodgeNo() {
             const noBtn = document.getElementById('no-btn');
             const yesBtn = document.getElementById('yes-btn');
+            const sadText = document.getElementById('sad-text');
 
-            const padding = 50;
+            // 1. Show Sad / Playful Text Message
+            sadText.innerText = sadMessages[sadTextIndex];
+            sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
+
+            // 2. Make NO button jump randomly within window bounds
+            const padding = 60;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
@@ -472,6 +511,7 @@
             noBtn.style.left = `${randomX}px`;
             noBtn.style.top = `${randomY}px`;
 
+            // 3. Make YES button grow bigger each try!
             yesScale += 0.35;
             yesBtn.style.transform = `scale(${yesScale})`;
         }
@@ -496,7 +536,6 @@
 
         function startTypewriter() {
             const target = document.getElementById('typewriter-text');
-            let pIndex = 0;
             let cIndex = 0;
             const fullIntroText = letterParagraphs.join('');
 
@@ -531,9 +570,12 @@
         const reasons = [
             "4 years na kitang paboritong pagmasdan at admire-in mula sa malayo ✨",
             "Napakaganda mo palagi—sa paningin at sa puso ko 🌸",
-            "Kahit nai-stress kita minsan, hinding-hindi ako magagalit o maiinis sa'yo 🤍",
+            "Kahit feeling mo hagard ka na teh maganda ka parin sa paningin ko",
             "Lagi lang akong nandito para makinig sa lahat ng problema mo anytime 🎧",
             "I'll always wait and wish the absolute best for you, kahit ano pa mangyari ✨"
+            "Gusto ko buong pagkatao mo teh"
+            "Hindi mo man ako gusto basta alam ko gusto kita at wala ng iba"
+
         ];
         let reasonIndex = 0;
 
@@ -552,11 +594,3 @@
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             heart.style.fontSize = Math.random() * 10 + 15 + 'px';
             document.body.appendChild(heart);
-
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-        setInterval(createHeart, 400);
-    </script>
-
-</body>
-</html>
