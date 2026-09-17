@@ -11,9 +11,18 @@
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+    rel="stylesheet"
+>
 
 <style>
+
+    /* =========================================
+       RESET
+    ========================================= */
+
     * {
         margin: 0;
         padding: 0;
@@ -25,13 +34,19 @@
     }
 
     body {
+        min-height: 100vh;
+
         background-color: #fce4ec;
-        background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+
+        background-image:
+            radial-gradient(
+                #f8bbd0 1px,
+                transparent 1px
+            );
+
         background-size: 20px 20px;
 
         font-family: 'Playfair Display', serif;
-
-        min-height: 100vh;
 
         display: flex;
         justify-content: center;
@@ -44,29 +59,32 @@
         position: relative;
     }
 
-    /* =========================
+
+    /* =========================================
        FALLING HEARTS
-    ========================== */
+    ========================================= */
 
     .heart-particle {
         position: fixed;
+
         top: -50px;
-
-        color: #f48fb1;
-
-        font-size: 20px;
 
         user-select: none;
         pointer-events: none;
 
-        animation: fall linear forwards;
-
         z-index: 1;
+
+        animation:
+            fall linear forwards;
     }
 
     @keyframes fall {
+
         0% {
-            transform: translateY(0) rotate(0deg);
+            transform:
+                translateY(0)
+                rotate(0deg);
+
             opacity: 0;
         }
 
@@ -75,17 +93,22 @@
         }
 
         100% {
-            transform: translateY(110vh) rotate(360deg);
+            transform:
+                translateY(110vh)
+                rotate(360deg);
+
             opacity: 0;
         }
     }
 
-    /* =========================
-       MAIN CONTAINER
-    ========================== */
+
+    /* =========================================
+       CONTAINER
+    ========================================= */
 
     .container {
         width: 100%;
+
         max-width: 650px;
 
         position: relative;
@@ -93,21 +116,23 @@
         z-index: 2;
     }
 
-    /* =========================
-       ENVELOPE SCREEN
-    ========================== */
+
+    /* =========================================
+       ENVELOPE
+    ========================================= */
 
     .envelope-card {
-        background-color: #fffdf9;
+        background: #fffdf9;
 
         padding: 50px 30px;
 
         border-radius: 16px;
 
-        box-shadow:
-            0 15px 35px rgba(233, 30, 99, 0.15);
-
         border: 2px solid #f48fb1;
+
+        box-shadow:
+            0 15px 35px
+            rgba(233, 30, 99, 0.15);
 
         text-align: center;
 
@@ -122,7 +147,8 @@
         transform: translateY(-5px);
 
         box-shadow:
-            0 20px 40px rgba(233, 30, 99, 0.25);
+            0 20px 40px
+            rgba(233, 30, 99, 0.25);
     }
 
     .envelope-icon {
@@ -132,11 +158,17 @@
 
         display: inline-block;
 
-        animation: bounce 2s infinite;
+        animation:
+            bounce 2s infinite;
     }
 
     @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% {
+
+        0%,
+        20%,
+        50%,
+        80%,
+        100% {
             transform: translateY(0);
         }
 
@@ -150,7 +182,9 @@
     }
 
     .envelope-title {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 2.5rem;
 
@@ -172,9 +206,11 @@
 
         font-size: 1.2rem;
 
-        font-family: 'Playfair Display', serif;
+        font-family:
+            'Playfair Display',
+            serif;
 
-        background-color: #e91e63;
+        background: #e91e63;
 
         color: white;
 
@@ -187,36 +223,39 @@
         font-weight: bold;
 
         box-shadow:
-            0 4px 15px rgba(233, 30, 99, 0.3);
+            0 4px 15px
+            rgba(233, 30, 99, 0.3);
 
         transition:
-            background-color 0.2s ease,
+            background 0.2s ease,
             transform 0.2s ease;
     }
 
     .open-btn:hover {
-        background-color: #c2185b;
+        background: #c2185b;
 
         transform: scale(1.05);
     }
 
-    /* =========================
+
+    /* =========================================
        MAIN CARD
-    ========================== */
+    ========================================= */
 
     .main-card {
         display: none;
 
-        background-color: #fffdf9;
+        background: #fffdf9;
 
         padding: 40px 30px;
 
         border-radius: 16px;
 
-        box-shadow:
-            0 15px 35px rgba(0, 0, 0, 0.1);
-
         border: 1px solid #f48fb1;
+
+        box-shadow:
+            0 15px 35px
+            rgba(0, 0, 0, 0.1);
 
         position: relative;
 
@@ -226,12 +265,14 @@
 
         text-align: center;
 
-        animation: fadeIn 1s forwards;
+        animation:
+            fadeIn 1s forwards;
     }
 
-    /* =========================
+
+    /* =========================================
        MUSIC PLAYER
-    ========================== */
+    ========================================= */
 
     .music-player {
         display: flex;
@@ -266,30 +307,34 @@
 
         cursor: pointer;
 
-        transition: transform 0.2s ease;
+        transition:
+            transform 0.2s ease;
     }
 
     .music-btn:hover {
         transform: scale(1.2);
     }
 
-    /* =========================
+
+    /* =========================================
        HEART
-    ========================== */
+    ========================================= */
 
     .heart {
         width: 40px;
         height: 40px;
 
-        background-color: #e91e63;
+        background: #e91e63;
 
-        margin: 0 auto 35px auto;
+        margin:
+            0 auto 35px auto;
 
         position: relative;
 
         transform: rotate(-45deg);
 
-        animation: pulse 1.2s infinite;
+        animation:
+            pulse 1.2s infinite;
     }
 
     .heart::before,
@@ -299,7 +344,7 @@
         width: 40px;
         height: 40px;
 
-        background-color: #e91e63;
+        background: #e91e63;
 
         border-radius: 50%;
 
@@ -317,29 +362,39 @@
     }
 
     @keyframes pulse {
+
         0% {
-            transform: rotate(-45deg) scale(1);
+            transform:
+                rotate(-45deg)
+                scale(1);
         }
 
         50% {
-            transform: rotate(-45deg) scale(1.1);
+            transform:
+                rotate(-45deg)
+                scale(1.1);
         }
 
         100% {
-            transform: rotate(-45deg) scale(1);
+            transform:
+                rotate(-45deg)
+                scale(1);
         }
     }
 
-    /* =========================
+
+    /* =========================================
        QUESTION
-    ========================== */
+    ========================================= */
 
     .question-section {
         margin-bottom: 20px;
     }
 
     .question-text {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 2.2rem;
 
@@ -349,6 +404,11 @@
 
         line-height: 1.4;
     }
+
+
+    /* =========================================
+       BUTTON AREA
+    ========================================= */
 
     .buttons-container {
         display: flex;
@@ -362,6 +422,8 @@
         min-height: 120px;
 
         position: relative;
+
+        width: 100%;
     }
 
     .btn {
@@ -369,7 +431,9 @@
 
         font-size: 1.1rem;
 
-        font-family: 'Playfair Display', serif;
+        font-family:
+            'Playfair Display',
+            serif;
 
         border: none;
 
@@ -379,69 +443,93 @@
 
         font-weight: bold;
 
-        transition:
-            transform 0.2s ease,
-            background-color 0.2s ease;
-
         box-shadow:
-            0 4px 10px rgba(0, 0, 0, 0.15);
+            0 4px 10px
+            rgba(0, 0, 0, 0.15);
 
         white-space: nowrap;
+
+        transition:
+            transform 0.2s ease,
+            background 0.2s ease;
     }
 
+
+    /* =========================================
+       YES BUTTON
+    ========================================= */
+
     #yes-btn {
-        background-color: #2e7d32;
+        background: #2e7d32;
 
         color: white;
 
         z-index: 10;
 
-        max-width: 90vw;
+        transform-origin: center;
     }
 
     #yes-btn:hover {
-        background-color: #1b5e20;
+        background: #1b5e20;
     }
 
-    /* =========================
+
+    /* =========================================
        NO BUTTON
-    ========================== */
+       
+       IMPORTANT:
+       It is fixed ONLY after it dodges.
+       It is always constrained to the viewport.
+    ========================================= */
 
     #no-btn {
-        background-color: #e53935;
+        background: #e53935;
 
         color: white;
 
         position: relative;
 
-        z-index: 999;
+        z-index: 99999;
 
         user-select: none;
 
+        touch-action: manipulation;
+
+        transform: translate(0, 0);
+
         transition:
-            left 0.25s ease,
-            top 0.25s ease,
+            left 0.3s ease,
+            top 0.3s ease,
             transform 0.2s ease;
     }
 
-    /* =========================
+    #no-btn:hover {
+        background: #c62828;
+    }
+
+
+    /* =========================================
        LETTER
-    ========================== */
+    ========================================= */
 
     .letter-content-wrapper {
         display: none;
 
         text-align: left;
 
-        animation: fadeIn 1.2s forwards;
-
         padding-top: 25px;
 
-        border-top: 2px dashed #f8bbd0;
+        border-top:
+            2px dashed #f8bbd0;
+
+        animation:
+            fadeIn 1.2s forwards;
     }
 
     .salutation {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 2.2rem;
 
@@ -455,16 +543,17 @@
 
         margin-bottom: 20px;
 
-        text-align: justify;
+        text-align: left;
 
         white-space: pre-wrap;
 
         line-height: 1.9;
     }
 
-    /* =========================
+
+    /* =========================================
        TYPEWRITER CURSOR
-    ========================== */
+    ========================================= */
 
     .cursor {
         display: inline-block;
@@ -473,15 +562,18 @@
 
         height: 1.1em;
 
-        background-color: #e91e63;
+        background: #e91e63;
 
         vertical-align: middle;
 
-        animation: blink 0.7s infinite;
+        animation:
+            blink 0.7s infinite;
     }
 
     @keyframes blink {
-        0%, 100% {
+
+        0%,
+        100% {
             opacity: 1;
         }
 
@@ -490,20 +582,23 @@
         }
     }
 
-    /* =========================
+
+    /* =========================================
        SONG LYRICS
-    ========================== */
+    ========================================= */
 
     .song-lyrics {
         display: none;
 
-        background-color: #fff0f5;
+        background: #fff0f5;
 
-        border-left: 3px solid #e91e63;
+        border-left:
+            3px solid #e91e63;
 
         padding: 18px;
 
-        margin: 25px 0 20px 0;
+        margin:
+            25px 0 20px 0;
 
         font-style: italic;
 
@@ -513,28 +608,33 @@
 
         color: #880e4f;
 
-        border-radius: 0 8px 8px 0;
-
-        animation: fadeIn 1s forwards;
+        border-radius:
+            0 8px 8px 0;
 
         line-height: 1.8;
+
+        animation:
+            fadeIn 1s forwards;
     }
 
     .song-title {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
-        font-size: 1.5rem;
-
-        margin-bottom: 10px;
+        font-size: 1.6rem;
 
         color: #c2185b;
+
+        margin-bottom: 10px;
 
         font-style: normal;
     }
 
-    /* =========================
+
+    /* =========================================
        YOUTUBE
-    ========================== */
+    ========================================= */
 
     .youtube-container {
         display: none;
@@ -547,18 +647,21 @@
 
         height: 0;
 
-        margin: 20px 0 30px 0;
+        margin:
+            20px 0 15px 0;
 
         border-radius: 12px;
 
         overflow: hidden;
 
+        background: #000;
+
         box-shadow:
-            0 4px 15px rgba(0, 0, 0, 0.15);
+            0 4px 15px
+            rgba(0, 0, 0, 0.15);
 
-        background-color: #000;
-
-        animation: fadeIn 1s forwards;
+        animation:
+            fadeIn 1s forwards;
     }
 
     .youtube-container iframe {
@@ -577,8 +680,6 @@
         display: none;
 
         text-align: center;
-
-        margin-top: -15px;
 
         margin-bottom: 25px;
 
@@ -599,12 +700,15 @@
         text-decoration: underline;
     }
 
-    /* =========================
+
+    /* =========================================
        ENDING
-    ========================== */
+    ========================================= */
 
     .closing {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 1.8rem;
 
@@ -616,7 +720,9 @@
     }
 
     .signature {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 2.2rem;
 
@@ -627,9 +733,10 @@
         margin-top: 5px;
     }
 
-    /* =========================
+
+    /* =========================================
        REASONS
-    ========================== */
+    ========================================= */
 
     .reasons-section {
         display: none;
@@ -638,15 +745,19 @@
 
         padding-top: 25px;
 
-        border-top: 2px dashed #f8bbd0;
+        border-top:
+            2px dashed #f8bbd0;
 
         text-align: center;
 
-        animation: fadeIn 1s forwards;
+        animation:
+            fadeIn 1s forwards;
     }
 
     .reasons-title {
-        font-family: 'Dancing Script', cursive;
+        font-family:
+            'Dancing Script',
+            cursive;
 
         font-size: 2rem;
 
@@ -656,18 +767,20 @@
     }
 
     .polaroid-card {
-        background-color: #ffffff;
+        background: #ffffff;
 
         padding: 20px 15px;
 
         border-radius: 8px;
 
         box-shadow:
-            0 8px 20px rgba(0, 0, 0, 0.08);
+            0 8px 20px
+            rgba(0, 0, 0, 0.08);
 
         border: 1px solid #eee;
 
-        margin: 0 auto 15px auto;
+        margin:
+            0 auto 15px auto;
 
         max-width: 400px;
 
@@ -696,7 +809,7 @@
     }
 
     .next-reason-btn {
-        background-color: #e91e63;
+        background: #e91e63;
 
         color: white;
 
@@ -711,24 +824,27 @@
         cursor: pointer;
 
         box-shadow:
-            0 4px 10px rgba(233, 30, 99, 0.2);
+            0 4px 10px
+            rgba(233, 30, 99, 0.2);
 
         transition:
-            background-color 0.2s ease,
+            background 0.2s ease,
             transform 0.2s ease;
     }
 
     .next-reason-btn:hover {
-        background-color: #c2185b;
+        background: #c2185b;
 
         transform: scale(1.05);
     }
 
-    /* =========================
-       ANIMATIONS
-    ========================== */
+
+    /* =========================================
+       FADE IN
+    ========================================= */
 
     @keyframes fadeIn {
+
         from {
             opacity: 0;
 
@@ -744,9 +860,10 @@
         }
     }
 
-    /* =========================
+
+    /* =========================================
        MOBILE
-    ========================== */
+    ========================================= */
 
     @media (max-width: 600px) {
 
@@ -779,9 +896,8 @@
         .music-player {
             font-size: 0.78rem;
 
-            padding: 7px 10px;
-
-            margin-bottom: 30px;
+            padding:
+                7px 10px;
         }
 
         .question-text {
@@ -789,13 +905,14 @@
         }
 
         .buttons-container {
-            min-height: 140px;
+            min-height: 150px;
 
             gap: 12px;
         }
 
         .btn {
-            padding: 11px 22px;
+            padding:
+                11px 20px;
 
             font-size: 1rem;
         }
@@ -804,8 +921,6 @@
             font-size: 0.98rem;
 
             line-height: 1.8;
-
-            text-align: left;
         }
 
         .salutation {
@@ -826,10 +941,9 @@
 
         .polaroid-card {
             font-size: 1rem;
-
-            padding: 20px 12px;
         }
     }
+
 </style>
 ```
 
@@ -838,32 +952,41 @@
 <body>
 
 ```
-<!-- ==========================================
+<!-- =========================================
      BACKGROUND MUSIC
-=========================================== -->
+========================================== -->
 
-<audio id="bg-music" loop preload="auto">
+<audio
+    id="bg-music"
+    loop
+    preload="auto"
+>
 
-    <!-- Local music file -->
-    <source src="love.mp3" type="audio/mpeg">
+    <!-- Put love.mp3 in the same folder -->
+    <source
+        src="love.mp3"
+        type="audio/mpeg"
+    >
 
     <!-- Online backup -->
     <source
         src="https://raw.githubusercontent.com/wyndell404-pixel/love_letter/main/love.mp3"
-        type="audio/mpeg">
+        type="audio/mpeg"
+    >
 
 </audio>
 
 
-<!-- ==========================================
+<!-- =========================================
      MAIN CONTAINER
-=========================================== -->
+========================================== -->
 
 <div class="container">
 
-    <!-- ======================================
-         STEP 0: ENVELOPE
-    ======================================= -->
+
+    <!-- =====================================
+         ENVELOPE SCREEN
+    ====================================== -->
 
     <div
         class="envelope-card"
@@ -893,14 +1016,15 @@
     </div>
 
 
-    <!-- ======================================
-         STEP 1 & 2: MAIN CARD
-    ======================================= -->
+    <!-- =====================================
+         MAIN CARD
+    ====================================== -->
 
     <div
         class="main-card"
         id="main-card"
     >
+
 
         <!-- MUSIC CONTROL -->
 
@@ -910,7 +1034,6 @@
                 class="music-btn"
                 id="music-toggle-btn"
                 onclick="toggleMusic()"
-                aria-label="Toggle music"
             >
                 🔊
             </button>
@@ -927,9 +1050,9 @@
         <div class="heart"></div>
 
 
-        <!-- ==================================
-             STEP 1: QUESTION
-        =================================== -->
+        <!-- =================================
+             QUESTION
+        ================================== -->
 
         <div
             class="question-section"
@@ -937,7 +1060,7 @@
         >
 
             <div class="question-text">
-                Mamimiss mo ba ako teh kung mawawala ako haha? ❤️
+                Mamimiss mo ba ako, teh, kung mawawala ako? Haha. ❤️
             </div>
 
 
@@ -951,12 +1074,12 @@
                     Yes!
                 </button>
 
+
                 <button
                     class="btn"
                     id="no-btn"
-                    onmouseenter="dodgeNo()"
                     onclick="dodgeNo()"
-                    ontouchstart="dodgeNo()"
+                    ontouchstart="handleTouchNo(event)"
                 >
                     No
                 </button>
@@ -966,9 +1089,9 @@
         </div>
 
 
-        <!-- ==================================
-             STEP 2: LETTER
-        =================================== -->
+        <!-- =================================
+             LETTER
+        ================================== -->
 
         <div
             class="letter-content-wrapper"
@@ -976,7 +1099,7 @@
         >
 
             <div class="salutation">
-                Hello Teh!
+                Hello, Teh!
             </div>
 
 
@@ -992,9 +1115,9 @@
             </div>
 
 
-            <!-- ==================================
+            <!-- =================================
                  SONG LYRICS
-            =================================== -->
+            ================================== -->
 
             <div
                 class="song-lyrics"
@@ -1017,9 +1140,9 @@
             </div>
 
 
-            <!-- ==================================
+            <!-- =================================
                  YOUTUBE VIDEO
-            =================================== -->
+            ================================== -->
 
             <div
                 class="youtube-container"
@@ -1029,7 +1152,7 @@
                 <iframe
                     id="yt-iframe"
                     src="https://www.youtube-nocookie.com/embed/s6wXgtEIhCw?rel=0"
-                    title="Antonio Bathan - Tantanan Official Lyric Video"
+                    title="Tantanan - Antonio Bathan"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     referrerpolicy="strict-origin-when-cross-origin"
                     allowfullscreen>
@@ -1038,7 +1161,7 @@
             </div>
 
 
-            <!-- YOUTUBE FALLBACK -->
+            <!-- FALLBACK -->
 
             <div
                 class="youtube-fallback"
@@ -1052,15 +1175,15 @@
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Panoorin sa YouTube 🎵
+                    Panoorin ang song sa YouTube 🎵
                 </a>
 
             </div>
 
 
-            <!-- ==================================
+            <!-- =================================
                  ENDING
-            =================================== -->
+            ================================== -->
 
             <div
                 id="ending-part"
@@ -1080,9 +1203,9 @@
         </div>
 
 
-        <!-- ==================================
+        <!-- =================================
              REASONS
-        =================================== -->
+        ================================== -->
 
         <div
             class="reasons-section"
@@ -1116,15 +1239,16 @@
 </div>
 
 
-<!-- ==========================================
+<!-- =========================================
      JAVASCRIPT
-=========================================== -->
+========================================== -->
 
 <script>
 
-    /* ==========================================
+
+    /* =========================================
        AUDIO
-    =========================================== */
+    ========================================== */
 
     const music =
         document.getElementById('bg-music');
@@ -1134,17 +1258,18 @@
 
     function openEnvelope() {
 
-        const envelope =
-            document.getElementById('envelope-screen');
+        document.getElementById(
+            'envelope-screen'
+        ).style.display = 'none';
 
-        const mainCard =
-            document.getElementById('main-card');
 
-        envelope.style.display = 'none';
+        document.getElementById(
+            'main-card'
+        ).style.display = 'block';
 
-        mainCard.style.display = 'block';
 
         playMusic();
+
     }
 
 
@@ -1152,12 +1277,13 @@
 
         music.volume = 0.8;
 
-        const playPromise =
+        const promise =
             music.play();
 
-        if (playPromise !== undefined) {
 
-            playPromise
+        if (promise !== undefined) {
+
+            promise
                 .then(() => {
 
                     isPlaying = true;
@@ -1165,6 +1291,7 @@
                     document.getElementById(
                         'music-toggle-btn'
                     ).innerText = '🔊';
+
 
                     document.getElementById(
                         'music-status'
@@ -1181,14 +1308,16 @@
                         'music-toggle-btn'
                     ).innerText = '🔇';
 
+
                     document.getElementById(
                         'music-status'
                     ).innerText =
-                        'Click 🔊 button to enable music';
+                        'Click 🔊 to enable music';
 
                 });
 
         }
+
     }
 
 
@@ -1200,15 +1329,20 @@
 
             isPlaying = false;
 
+
             document.getElementById(
                 'music-toggle-btn'
             ).innerText = '🔇';
 
+
             document.getElementById(
                 'music-status'
-            ).innerText = 'Music Paused';
+            ).innerText =
+                'Music Paused';
 
-        } else {
+        }
+
+        else {
 
             music.play()
                 .then(() => {
@@ -1218,6 +1352,7 @@
                     document.getElementById(
                         'music-toggle-btn'
                     ).innerText = '🔊';
+
 
                     document.getElementById(
                         'music-status'
@@ -1231,21 +1366,26 @@
                     document.getElementById(
                         'music-status'
                     ).innerText =
-                        'Unable to play music';
+                        'Click 🔊 to enable music';
 
                 });
 
         }
+
     }
 
 
-    /* ==========================================
+    /* =========================================
        NO BUTTON
-    =========================================== */
+       
+       This is the important fix.
+    ========================================== */
 
     let yesScale = 1;
 
     let sadTextIndex = 0;
+
+    let isDodging = false;
 
 
     const sadMessages = [
@@ -1260,20 +1400,46 @@
 
         "Bawal mag-No! 🥺👉👈",
 
-        "Weh, talaga ba? 💖",
+        "Weh, talaga ba? 😂",
 
         "Mali yang napipindot mo! 😂"
 
     ];
 
 
+    function handleTouchNo(event) {
+
+        event.preventDefault();
+
+        dodgeNo();
+
+    }
+
+
     function dodgeNo() {
 
+        /*
+         * Prevent multiple dodge events
+         * from happening at the same time.
+         */
+
+        if (isDodging) {
+            return;
+        }
+
+        isDodging = true;
+
+
         const noBtn =
-            document.getElementById('no-btn');
+            document.getElementById(
+                'no-btn'
+            );
+
 
         const yesBtn =
-            document.getElementById('yes-btn');
+            document.getElementById(
+                'yes-btn'
+            );
 
 
         /* Change text */
@@ -1281,34 +1447,60 @@
         noBtn.innerText =
             sadMessages[sadTextIndex];
 
+
         sadTextIndex =
             (sadTextIndex + 1)
             % sadMessages.length;
 
 
-        /* Make sure button is visible */
+        /*
+         * Make sure the button is visible.
+         */
 
         noBtn.style.display = 'block';
 
 
         /*
-         * Move button using FIXED positioning.
-         * The button will always remain inside
-         * the visible browser window.
+         * Change to fixed positioning
+         * only when it actually dodges.
          */
 
         noBtn.style.position = 'fixed';
 
 
+        /*
+         * IMPORTANT:
+         * Remove any transform that could
+         * interfere with our coordinates.
+         */
+
+        noBtn.style.transform =
+            'translate(0, 0)';
+
+
+        /*
+         * Force browser to calculate the
+         * NEW button size after its text changes.
+         */
+
         const btnWidth =
             noBtn.offsetWidth;
+
 
         const btnHeight =
             noBtn.offsetHeight;
 
 
-        const margin = 20;
+        /*
+         * Large safety margin.
+         */
 
+        const margin = 25;
+
+
+        /*
+         * Calculate safe viewport area.
+         */
 
         const maxX =
             Math.max(
@@ -1328,6 +1520,10 @@
             );
 
 
+        /*
+         * Random position.
+         */
+
         const randomX =
             Math.floor(
                 Math.random() *
@@ -1342,14 +1538,36 @@
             ) + margin;
 
 
+        /*
+         * Clamp position so it can NEVER
+         * leave the viewport.
+         */
+
+        const safeX =
+            Math.min(
+                Math.max(randomX, margin),
+                maxX
+            );
+
+
+        const safeY =
+            Math.min(
+                Math.max(randomY, margin),
+                maxY
+            );
+
+
         noBtn.style.left =
-            `${randomX}px`;
+            `${safeX}px`;
+
 
         noBtn.style.top =
-            `${randomY}px`;
+            `${safeY}px`;
 
 
-        /* Make YES button bigger */
+        /*
+         * Make YES slightly larger.
+         */
 
         if (yesScale < 1.8) {
 
@@ -1360,48 +1578,440 @@
 
         }
 
+
+        /*
+         * Short cooldown.
+         *
+         * This prevents the mouse from
+         * triggering dodgeNo repeatedly
+         * while the button is moving.
+         */
+
+        setTimeout(() => {
+
+            isDodging = false;
+
+        }, 450);
+
     }
 
 
-    /* ==========================================
-       YES BUTTON
-    =========================================== */
+    /* =========================================
+       YES
+    ========================================== */
 
     function acceptLove() {
 
-        const questionArea =
-            document.getElementById(
-                'question-area'
-            );
-
-        const noBtn =
-            document.getElementById(
-                'no-btn'
-            );
-
-        const letterArea =
-            document.getElementById(
-                'letter-area'
-            );
+        document.getElementById(
+            'question-area'
+        ).style.display = 'none';
 
 
-        questionArea.style.display =
-            'none';
+        document.getElementById(
+            'no-btn'
+        ).style.display = 'none';
 
-        noBtn.style.display =
-            'none';
 
-        letterArea.style.display =
-            'block';
+        document.getElementById(
+            'letter-area'
+        ).style.display = 'block';
 
 
         startTypewriter();
 
-<button
-    class="btn"
-    id="no-btn"
-    onclick="dodgeNo()"
-    ontouchstart="handleTouchNo(event)"
->
-    No
-</button>
+    }
+
+
+    /* =========================================
+       LETTER TEXT
+       
+       English grammar and word choice
+       cleaned up while keeping your
+       original Taglish personality.
+    ========================================== */
+
+    const introText =
+
+        "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sa'yo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo naman hiningi. Siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na, teh. Yung time na naging uncomfortable ka na kasama ako, especially noong birthday mo, I'm really sorry for that. Pero ayun, ekis na 'yon. Let's just focus on the present!\n\n" +
+
+        "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na rin na umabot na ng four years since noong una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like, what?! Mapapakanta ka na lang ng, \"Unang araw pa lang, minahal na kita. Bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope you like this.\n\n" +
+
+        "Sorry rin, teh, kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita. Kahit dream lang naman siya, peace! Ang masasabi ko lang at magagawa ko ay I will never, ever get tired of caring about you. Para sa akin, ikaw ang isa sa pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso—always remember that I will always admire you from afar, and I will still wait for you until the end. Oo na, OA na kung OA! Ika nga sa kantang napakinggan ko:\n\n";
+
+
+    const postSongText =
+
+        "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko. Siyempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa Niya palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember that anytime, you can come to me or tell me about the problems you're going through, and I will always listen. Kahit hindi ko man kayang ayusin ang lahat, I can always be here to listen.";
+
+
+    /* =========================================
+       TYPEWRITER
+    ========================================== */
+
+    function startTypewriter() {
+
+        const target =
+            document.getElementById(
+                'typewriter-text'
+            );
+
+
+        const cursor =
+            document.getElementById(
+                'typewriter-cursor'
+            );
+
+
+        let introIndex = 0;
+
+
+        function typeIntro() {
+
+            if (
+                introIndex <
+                introText.length
+            ) {
+
+                target.textContent +=
+                    introText.charAt(
+                        introIndex
+                    );
+
+
+                introIndex++;
+
+
+                setTimeout(
+                    typeIntro,
+                    28
+                );
+
+            }
+
+            else {
+
+                /*
+                 * Show song lyrics.
+                 */
+
+                document.getElementById(
+                    'lyrics-box'
+                ).style.display =
+                    'block';
+
+
+                /*
+                 * Show YouTube video.
+                 */
+
+                document.getElementById(
+                    'yt-player-box'
+                ).style.display =
+                    'block';
+
+
+                /*
+                 * Show fallback link.
+                 */
+
+                document.getElementById(
+                    'youtube-fallback'
+                ).style.display =
+                    'block';
+
+
+                /*
+                 * Pause background music.
+                 */
+
+                music.pause();
+
+                isPlaying = false;
+
+
+                document.getElementById(
+                    'music-toggle-btn'
+                ).innerText = '🔇';
+
+
+                document.getElementById(
+                    'music-status'
+                ).innerText =
+                    'Music Paused for Video 🎥';
+
+
+                /*
+                 * Continue letter.
+                 */
+
+                setTimeout(
+                    typePostSong,
+                    1000
+                );
+
+            }
+
+        }
+
+
+        let postIndex = 0;
+
+
+        function typePostSong() {
+
+            if (
+                postIndex <
+                postSongText.length
+            ) {
+
+                target.textContent +=
+                    postSongText.charAt(
+                        postIndex
+                    );
+
+
+                postIndex++;
+
+
+                setTimeout(
+                    typePostSong,
+                    28
+                );
+
+            }
+
+            else {
+
+                cursor.style.display =
+                    'none';
+
+
+                document.getElementById(
+                    'ending-part'
+                ).style.display =
+                    'block';
+
+
+                document.getElementById(
+                    'reasons-area'
+                ).style.display =
+                    'block';
+
+            }
+
+        }
+
+
+        typeIntro();
+
+    }
+
+
+    /* =========================================
+       REASONS
+    ========================================== */
+
+    const reasons = [
+
+        "Four years na kitang paboritong pagmasdan at i-admire mula sa malayo. ✨",
+
+        "Napakaganda mo palagi—sa paningin at sa puso ko. 🌸",
+
+        "Kahit feeling mo hagard ka na, teh, maganda ka pa rin sa paningin ko.",
+
+        "Lagi lang akong nandito para makinig sa lahat ng problema mo, anytime. 🎧",
+
+        "I'll always wait and wish you nothing but the absolute best, kahit ano pa man ang mangyari. ✨",
+
+        "Gusto ko ang buong pagkatao mo, teh.",
+
+        "Hindi mo man ako gusto, basta alam ko na gusto kita, at wala nang iba."
+
+    ];
+
+
+    let reasonIndex = 0;
+
+
+    function nextReason() {
+
+        const display =
+            document.getElementById(
+                'polaroid-text'
+            );
+
+
+        display.innerText =
+            `"${reasons[reasonIndex]}"`;
+
+
+        reasonIndex =
+            (
+                reasonIndex + 1
+            ) % reasons.length;
+
+    }
+
+
+    /* =========================================
+       FALLING HEART GENERATOR
+    ========================================== */
+
+    function createHeart() {
+
+        const heart =
+            document.createElement(
+                'div'
+            );
+
+
+        heart.classList.add(
+            'heart-particle'
+        );
+
+
+        heart.innerHTML =
+            '💖';
+
+
+        heart.style.left =
+            Math.random() * 100 + 'vw';
+
+
+        heart.style.animationDuration =
+            Math.random() * 3 + 2 + 's';
+
+
+        heart.style.fontSize =
+            Math.random() * 10 + 15 + 'px';
+
+
+        document.body.appendChild(
+            heart
+        );
+
+
+        setTimeout(() => {
+
+            heart.remove();
+
+        }, 5000);
+
+    }
+
+
+    setInterval(
+        createHeart,
+        400
+    );
+
+
+    /* =========================================
+       KEEP NO BUTTON INSIDE SCREEN
+       
+       If the browser window is resized,
+       reposition the button safely.
+    ========================================== */
+
+    window.addEventListener(
+        'resize',
+        () => {
+
+            const noBtn =
+                document.getElementById(
+                    'no-btn'
+                );
+
+
+            if (
+                noBtn.style.position !==
+                'fixed'
+            ) {
+                return;
+            }
+
+
+            if (
+                noBtn.style.display ===
+                'none'
+            ) {
+                return;
+            }
+
+
+            const width =
+                noBtn.offsetWidth;
+
+
+            const height =
+                noBtn.offsetHeight;
+
+
+            const margin = 25;
+
+
+            const maxX =
+                Math.max(
+                    margin,
+                    window.innerWidth -
+                    width -
+                    margin
+                );
+
+
+            const maxY =
+                Math.max(
+                    margin,
+                    window.innerHeight -
+                    height -
+                    margin
+                );
+
+
+            let currentX =
+                parseFloat(
+                    noBtn.style.left
+                ) || margin;
+
+
+            let currentY =
+                parseFloat(
+                    noBtn.style.top
+                ) || margin;
+
+
+            currentX =
+                Math.min(
+                    Math.max(
+                        currentX,
+                        margin
+                    ),
+                    maxX
+                );
+
+
+            currentY =
+                Math.min(
+                    Math.max(
+                        currentY,
+                        margin
+                    ),
+                    maxY
+                );
+
+
+            noBtn.style.left =
+                `${currentX}px`;
+
+
+            noBtn.style.top =
+                `${currentY}px`;
+
+        }
+    );
+
+</script>
+```
+
+</body>
+</html>
