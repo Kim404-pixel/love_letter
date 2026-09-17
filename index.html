@@ -225,7 +225,7 @@
             background-color: #e53935;
             color: white;
             position: relative;
-            transition: left 0.2s ease, top 0.2s ease, transform 0.2s ease;
+            transition: left 0.15s ease, top 0.15s ease;
             z-index: 999;
             user-select: none;
         }
@@ -269,6 +269,7 @@
         }
 
         .song-lyrics {
+            display: none;
             background-color: #fff0f5;
             border-left: 3px solid #e91e63;
             padding: 15px;
@@ -278,6 +279,7 @@
             font-size: 1rem;
             color: #880e4f;
             border-radius: 0 8px 8px 0;
+            animation: fadeIn 1s forwards;
         }
 
         /* Responsive YouTube Video Frame Container */
@@ -423,7 +425,7 @@
                 <div class="content"><span id="typewriter-text"></span><span class="cursor" id="typewriter-cursor"></span></div>
 
                 <!-- Lyrics Box -->
-                <div class="song-lyrics" id="lyrics-box" style="display: none;">
+                <div class="song-lyrics" id="lyrics-box">
                     "Hindi kita tatantanan hangga't<br>
                     Wala pang tan-tan-tanan,<br>
                     Tan-tan-tanan!<br>
@@ -434,7 +436,7 @@
                     Sinta."
                 </div>
 
-                <!-- Embedded YouTube Player Frame (Direct Embed Bypass) -->
+                <!-- Embedded YouTube Player Frame -->
                 <div class="youtube-container" id="yt-player-box">
                     <iframe 
                         id="yt-iframe" 
@@ -503,7 +505,7 @@
             }
         }
 
-        // Dodging No Button Effect
+        // Dodging No Button Effect with Screen Boundary Guarantee
         let yesScale = 1;
         let sadTextIndex = 0;
 
@@ -524,16 +526,21 @@
             noBtn.innerText = sadMessages[sadTextIndex];
             sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
 
-            const padding = 60;
-            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+            const padding = 20;
 
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+            const minX = padding;
+            const maxX = window.innerWidth - btnWidth - padding;
+            const minY = padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+            const randomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
             noBtn.style.position = 'fixed';
-            noBtn.style.left = `${randomX}px`;
-            noBtn.style.top = `${randomY}px`;
+            noBtn.style.left = `${Math.max(minX, Math.min(randomX, maxX))}px`;
+            noBtn.style.top = `${Math.max(minY, Math.min(randomY, maxY))}px`;
 
             if (yesScale < 1.8) {
                 yesScale += 0.15;
@@ -549,50 +556,46 @@
             startTypewriter();
         }
 
-        // Typewriter Effect Data
-        const letterParagraphs = [
-            "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na teh, Yung time na naging uncomfortable ka na kasama ako especially birthday mo yun, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!\n\n",
-            "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, \"Unang araw palang minahal na kita, bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope magustuhan mo ito.\n\n",
-            "Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa ko ay, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:\n\n"
-        ];
+        // Typewriter Effect Data - Tamang Sequence
+        const introText = "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na teh, Yung time na naging uncomfortable ka na kasama ako especially birthday mo yun, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!\n\nAyun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, \"Unang araw palang minahal na kita, bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope magustuhan mo ito.\n\nSorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa ko ay, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:\n\n";
 
         const postSongText = "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.";
 
         function startTypewriter() {
             const target = document.getElementById('typewriter-text');
             let cIndex = 0;
-            const fullIntroText = letterParagraphs.join('');
 
+            // Step 1: Type the introductory paragraphs up to the song introduction
             function typeIntro() {
-                if (cIndex < fullIntroText.length) {
-                    target.textContent += fullIntroText.charAt(cIndex);
+                if (cIndex < introText.length) {
+                    target.textContent += introText.charAt(cIndex);
                     cIndex++;
                     setTimeout(typeIntro, 30);
                 } else {
-                    // Pakita ang Lyrics Box at YouTube Frame
+                    // Step 2: Show Lyrics Box & YouTube Frame EXPLICITLY here
                     document.getElementById('lyrics-box').style.display = 'block';
                     document.getElementById('yt-player-box').style.display = 'block';
 
-                    // Pause background music para hindi magkalat ang boses kapag in-play ang video
+                    // Pause background music para hindi magpatong ang audio
                     music.pause();
                     isPlaying = false;
                     document.getElementById('music-toggle-btn').innerText = '🔇';
                     document.getElementById('music-status').innerText = 'Music Paused for Video 🎥';
 
+                    // Step 3: Proceed to type the remaining "Cringe na kung cringe..." text
+                    let postIndex = 0;
+                    function typePostSong() {
+                        if (postIndex < postSongText.length) {
+                            target.textContent += postSongText.charAt(postIndex);
+                            postIndex++;
+                            setTimeout(typePostSong, 30);
+                        } else {
+                            document.getElementById('typewriter-cursor').style.display = 'none';
+                            document.getElementById('ending-part').style.display = 'block';
+                            document.getElementById('reasons-area').style.display = 'block';
+                        }
+                    }
                     typePostSong();
-                }
-            }
-
-            let postIndex = 0;
-            function typePostSong() {
-                if (postIndex < postSongText.length) {
-                    target.textContent += postSongText.charAt(postIndex);
-                    postIndex++;
-                    setTimeout(typePostSong, 30);
-                } else {
-                    document.getElementById('typewriter-cursor').style.display = 'none';
-                    document.getElementById('ending-part').style.display = 'block';
-                    document.getElementById('reasons-area').style.display = 'block';
                 }
             }
 
