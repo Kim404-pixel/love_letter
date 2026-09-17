@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Letter For You</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fce4ec;
+            background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+            background-size: 20px 20px;
+            font-family: 'Playfair Display', serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .letter-card {
+            background-color: #fffdf9;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid #f48fb1;
+            position: relative;
+            line-height: 1.8;
+            color: #4a4a4a;
+            text-align: center;
+        }
+
+        /* Floating Animated Heart */
+        .heart {
+            width: 40px;
+            height: 40px;
+            background-color: #e91e63;
+            margin: 0 auto 25px auto;
+            position: relative;
+            transform: rotate(-45deg);
+            animation: pulse 1.2s infinite;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 40px;
+            height: 40px;
+            background-color: #e91e63;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .heart::after {
+            left: 20px;
+            top: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+
+        .salutation {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #c2185b;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .content {
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .song-lyrics {
+            background-color: #fff0f5;
+            border-left: 3px solid #e91e63;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+            text-align: center;
+            font-size: 1rem;
+            color: #880e4f;
+        }
+
+        .closing {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #c2185b;
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.2rem;
+            color: #880e4f;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        /* Interactive Question Area */
+        .question-section {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px dashed #f8bbd0;
+        }
+
+        .question-text {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #ad1457;
+            margin-bottom: 20px;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-size: 1.1rem;
+            font-family: 'Playfair Display', serif;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        #yes-btn {
+            background-color: #2e7d32;
+            color: white;
+            z-index: 10;
+        }
+
+        #yes-btn:hover {
+            background-color: #1b5e20;
+        }
+
+        #no-btn {
+            background-color: #e53935;
+            color: white;
+            position: relative;
+            transition: all 0.2s ease-out;
+            z-index: 999;
+        }
+
+        .success-message {
+            display: none;
+            margin-top: 25px;
+            font-size: 1.5rem;
+            color: #c2185b;
+            font-family: 'Dancing Script', cursive;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="letter-card">
+            <!-- Animated Heart Icon -->
+            <div class="heart"></div>
+
+            <!-- Letter Salutation -->
+            <div class="salutation">Hello Teh!</div>
+            
+            <!-- Main Content -->
+            <div class="content">
+                <p>Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sayo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo hiningi—siguro mapapasabi ka na, "Nababaliw na naman si anteh." Sorry na agad, teh, kung tuwing may ganap o happenings ay parang nai-stress kita o baka naging uncomfortable ka, and I am really sorry for that. Pero ayun, ekis na yun, let's just focus on the present!</p>
+                <br>
+                <p>Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na ring umabot na ng 4 years since nung una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like what?! Mapapakanta ka na lang ng, "Unang araw palang minahal na kita, bakit ba ganito ang aking nadarama?" Hahaha. So ayun, teh, I really hope magustuhan mo ito.</p>
+                <br>
+                <p>Sorry rin teh kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita (kahit dream lang siya, peace!). Ang masasabi ko lang at magagawa, I will never, ever mainis sa'yo, at ikaw lang ang pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso always remember na I will always admire you from afar, and I will still wait for you until the end (oo na, OA na kung OA!). Ika nga sa kantang napakinggan ko:</p>
+                
+                <div class="song-lyrics">
+                    "Hindi kita tatantanan hangga't<br>
+                    Wala pang tan-tan-tanan,<br>
+                    Tan-tan-tanan!<br>
+                    Sa hirap at ginhawa,<br>
+                    Sa lungkot at sa ligaya,<br>
+                    'Di kita tatantanan,<br>
+                    'Di kita tatantanan,<br>
+                    Sinta."
+                </div>
+
+                <p>Cringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko syempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember na anytime pwede mo akong matakbuhan o masabihan ng mga problema mo, and I will always listen.</p>
+            </div>
+
+            <div class="closing">Salamat sa Diyos at nakilala kita.</div>
+            <div class="signature">Dell</div>
+
+            <!-- Interactive Question Section -->
+            <div class="question-section" id="interactive-area">
+                <div class="question-text">Mag-e-date pa rin ba tayo? ❤️</div>
+                
+                <div class="buttons-container">
+                    <button class="btn" id="yes-btn" onclick="acceptLove()">Yes!</button>
+                    <button class="btn" id="no-btn" onmouseover="dodgeNo()" onclick="dodgeNo()">No</button>
+                </div>
+
+                <div class="success-message" id="success-msg">
+                    Yay! Sabi na nga ba 'di mo ako matatanggihan eh! 💖🥰
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let yesScale = 1;
+
+        function dodgeNo() {
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+
+            const padding = 50;
+            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${randomX}px`;
+            noBtn.style.top = `${randomY}px`;
+
+            yesScale += 0.35;
+            yesBtn.style.transform = `scale(${yesScale})`;
+        }
+
+        function acceptLove() {
+            const successMsg = document.getElementById('success-msg');
+            const buttonsContainer = document.querySelector('.buttons-container');
+            const noBtn = document.getElementById('no-btn');
+
+            buttonsContainer.style.display = 'none';
+            noBtn.style.display = 'none';
+            successMsg.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
