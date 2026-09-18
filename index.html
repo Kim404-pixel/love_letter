@@ -473,10 +473,6 @@
 
     /* =========================================
        NO BUTTON
-       
-       IMPORTANT:
-       It is fixed ONLY after it dodges.
-       It is always constrained to the viewport.
     ========================================= */
 
     #no-btn {
@@ -937,6 +933,7 @@
 
 </head>
 <body>
+
 <!-- =========================================
      BACKGROUND MUSIC
 ========================================== -->
@@ -946,19 +943,14 @@
     loop
     preload="auto"
 >
-
-    <!-- Put love.mp3 in the same folder -->
     <source
         src="love.mp3"
         type="audio/mpeg"
     >
-
-    <!-- Online backup -->
     <source
         src="https://raw.githubusercontent.com/wyndell404-pixel/love_letter/main/love.mp3"
         type="audio/mpeg"
     >
-
 </audio>
 
 
@@ -968,17 +960,14 @@
 
 <div class="container">
 
-
     <!-- =====================================
          ENVELOPE SCREEN
     ====================================== -->
-
     <div
         class="envelope-card"
         id="envelope-screen"
         onclick="openEnvelope()"
     >
-
         <div class="envelope-icon">
             💌
         </div>
@@ -997,24 +986,19 @@
         >
             Open Me
         </button>
-
     </div>
 
 
     <!-- =====================================
          MAIN CARD
     ====================================== -->
-
     <div
         class="main-card"
         id="main-card"
     >
 
-
         <!-- MUSIC CONTROL -->
-
         <div class="music-player">
-
             <button
                 class="music-btn"
                 id="music-toggle-btn"
@@ -1026,31 +1010,23 @@
             <span id="music-status">
                 Now Playing: Love - Wave To Earth 🎵
             </span>
-
         </div>
 
-
         <!-- HEART -->
-
         <div class="heart"></div>
-
 
         <!-- =================================
              QUESTION
         ================================== -->
-
         <div
             class="question-section"
             id="question-area"
         >
-
             <div class="question-text">
                 Mamimiss mo ba ako, teh, kung mawawala ako? Haha. ❤️
             </div>
 
-
             <div class="buttons-container">
-
                 <button
                     class="btn"
                     id="yes-btn"
@@ -1059,60 +1035,47 @@
                     Yes!
                 </button>
 
-
                 <button
                     class="btn"
                     id="no-btn"
                     onclick="dodgeNo()"
-                    ontouchstart="handleTouchNo(event)"
+                    ontouchstart="dodgeNo()"
                 >
                     No
                 </button>
-
             </div>
-
         </div>
 
 
         <!-- =================================
              LETTER
         ================================== -->
-
         <div
             class="letter-content-wrapper"
             id="letter-area"
         >
-
             <div class="salutation">
                 Hello, Teh!
             </div>
 
-
             <div class="content">
-
                 <span id="typewriter-text"></span>
-
                 <span
                     class="cursor"
                     id="typewriter-cursor"
                 ></span>
-
             </div>
-
 
             <!-- =================================
                  SONG LYRICS
             ================================== -->
-
             <div
                 class="song-lyrics"
                 id="lyrics-box"
             >
-
                 <div class="song-title">
                     🎵 Tantanan
                 </div>
-
                 "Hindi kita tatantanan hangga't<br>
                 Wala pang tan-tan-tanan,<br>
                 Tan-tan-tanan!<br>
@@ -1121,19 +1084,15 @@
                 'Di kita tatantanan,<br>
                 'Di kita tatantanan,<br>
                 Sinta."
-
             </div>
-
 
             <!-- =================================
                  YOUTUBE VIDEO
             ================================== -->
-
             <div
                 class="youtube-container"
                 id="yt-player-box"
             >
-
                 <iframe
                     id="yt-iframe"
                     src="https://www.youtube-nocookie.com/embed/s6wXgtEIhCw?rel=0"
@@ -1142,19 +1101,14 @@
                     referrerpolicy="strict-origin-when-cross-origin"
                     allowfullscreen>
                 </iframe>
-
             </div>
 
-
             <!-- FALLBACK -->
-
             <div
                 class="youtube-fallback"
                 id="youtube-fallback"
             >
-
                 Hindi lumabas ang video?
-
                 <a
                     href="https://www.youtube.com/watch?v=s6wXgtEIhCw"
                     target="_blank"
@@ -1162,19 +1116,15 @@
                 >
                     Panoorin ang song sa YouTube 🎵
                 </a>
-
             </div>
-
 
             <!-- =================================
                  ENDING
             ================================== -->
-
             <div
                 id="ending-part"
                 style="display: none;"
             >
-
                 <div class="closing">
                     Salamat sa Diyos at nakilala kita.
                 </div>
@@ -1182,7 +1132,6 @@
                 <div class="signature">
                     Mhiema
                 </div>
-
             </div>
 
         </div>
@@ -1191,16 +1140,13 @@
         <!-- =================================
              REASONS
         ================================== -->
-
         <div
             class="reasons-section"
             id="reasons-area"
         >
-
             <div class="reasons-title">
                 ✨ Reasons Why I Admire You ✨
             </div>
-
 
             <div
                 class="polaroid-card"
@@ -1209,14 +1155,12 @@
                 Click the button below to see...
             </div>
 
-
             <button
                 class="next-reason-btn"
                 onclick="nextReason()"
             >
                 Show Reason 💖
             </button>
-
         </div>
 
     </div>
@@ -1227,145 +1171,49 @@
 <!-- =========================================
      JAVASCRIPT
 ========================================== -->
-
 <script>
-
-
-    /* =========================================
-       AUDIO
-    ========================================== */
-
-    const music =
-        document.getElementById('bg-music');
-
+    const music = document.getElementById('bg-music');
     let isPlaying = false;
 
-
     function openEnvelope() {
-
-        document.getElementById(
-            'envelope-screen'
-        ).style.display = 'none';
-
-
-        document.getElementById(
-            'main-card'
-        ).style.display = 'block';
-
-
+        document.getElementById('envelope-screen').style.display = 'none';
+        document.getElementById('main-card').style.display = 'block';
         playMusic();
-
     }
-
 
     function playMusic() {
-
         music.volume = 0.8;
-
-        const promise =
-            music.play();
-
+        const promise = music.play();
 
         if (promise !== undefined) {
-
-            promise
-                .then(() => {
-
-                    isPlaying = true;
-
-                    document.getElementById(
-                        'music-toggle-btn'
-                    ).innerText = '🔊';
-
-
-                    document.getElementById(
-                        'music-status'
-                    ).innerText =
-                        'Now Playing: Love - Wave To Earth 🎵';
-
-                })
-
-                .catch(() => {
-
-                    isPlaying = false;
-
-                    document.getElementById(
-                        'music-toggle-btn'
-                    ).innerText = '🔇';
-
-
-                    document.getElementById(
-                        'music-status'
-                    ).innerText =
-                        'Click 🔊 to enable music';
-
-                });
-
+            promise.then(() => {
+                isPlaying = true;
+                document.getElementById('music-toggle-btn').innerText = '🔊';
+                document.getElementById('music-status').innerText = 'Now Playing: Love - Wave To Earth 🎵';
+            }).catch(() => {
+                isPlaying = false;
+                document.getElementById('music-toggle-btn').innerText = '🔇';
+                document.getElementById('music-status').innerText = 'Click 🔊 to enable music';
+            });
         }
-
     }
-
 
     function toggleMusic() {
-
         if (isPlaying) {
-
             music.pause();
-
             isPlaying = false;
-
-
-            document.getElementById(
-                'music-toggle-btn'
-            ).innerText = '🔇';
-
-
-            document.getElementById(
-                'music-status'
-            ).innerText =
-                'Music Paused';
-
+            document.getElementById('music-toggle-btn').innerText = '🔇';
+            document.getElementById('music-status').innerText = 'Music Paused';
+        } else {
+            music.play().then(() => {
+                isPlaying = true;
+                document.getElementById('music-toggle-btn').innerText = '🔊';
+                document.getElementById('music-status').innerText = 'Now Playing: Love - Wave To Earth 🎵';
+            }).catch(() => {
+                document.getElementById('music-status').innerText = 'Click 🔊 to enable music';
+            });
         }
-
-        else {
-
-            music.play()
-                .then(() => {
-
-                    isPlaying = true;
-
-                    document.getElementById(
-                        'music-toggle-btn'
-                    ).innerText = '🔊';
-
-
-                    document.getElementById(
-                        'music-status'
-                    ).innerText =
-                        'Now Playing: Love - Wave To Earth 🎵';
-
-                })
-
-                .catch(() => {
-
-                    document.getElementById(
-                        'music-status'
-                    ).innerText =
-                        'Click 🔊 to enable music';
-
-                });
-
-        }
-
     }
-
-
-    /* =========================================
-       NO BUTTON
-
-       The No button stays inside the button area
-       so it can never disappear off-screen.
-    ========================================== */
 
     let yesScale = 1;
     let sadTextIndex = 0;
@@ -1393,7 +1241,6 @@
         noBtn.innerText = sadMessages[sadTextIndex];
         sadTextIndex = (sadTextIndex + 1) % sadMessages.length;
 
-        // Make sure the browser recalculates the button size after the text changes.
         const areaWidth = area.clientWidth;
         const areaHeight = area.clientHeight;
         const btnWidth = noBtn.offsetWidth;
@@ -1406,7 +1253,6 @@
         const x = padding + Math.random() * Math.max(1, maxX - padding);
         const y = padding + Math.random() * Math.max(1, maxY - padding);
 
-        // Absolute positioning is relative to .buttons-container.
         noBtn.style.left = `${Math.min(x, maxX)}px`;
         noBtn.style.top = `${Math.min(y, maxY)}px`;
         noBtn.style.transform = 'none';
@@ -1421,314 +1267,98 @@
         }, 350);
     }
 
-
-    /* =========================================
-       YES
-    ========================================== */
-
     function acceptLove() {
-
-        document.getElementById(
-            'question-area'
-        ).style.display = 'none';
-
-
-        document.getElementById(
-            'no-btn'
-        ).style.display = 'none';
-
-
-        document.getElementById(
-            'letter-area'
-        ).style.display = 'block';
-
-
+        document.getElementById('question-area').style.display = 'none';
+        document.getElementById('no-btn').style.display = 'none';
+        document.getElementById('letter-area').style.display = 'block';
         startTypewriter();
-
     }
 
-
-    /* =========================================
-       LETTER TEXT
-       
-       English grammar and word choice
-       cleaned up while keeping your
-       original Taglish personality.
-    ========================================== */
-
     const introText =
-
+        const introText =
         "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sa'yo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo naman hiningi. Siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na, teh. Yung time na naging uncomfortable ka na kasama ako, especially noong birthday mo, I'm really sorry for that. Pero ayun, ekis na 'yon. Let's just focus on the present!\n\n" +
-
         "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na rin na umabot na ng four years since noong una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like, what?! Mapapakanta ka na lang ng, \"Unang araw pa lang, minahal na kita. Bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope you like this.\n\n" +
-
-        "Sorry rin, teh, kung kahit na-reject mo na ako, pangarap ko pa rin na maging future wife kita. Kahit dream lang naman siya, peace! Ang masasabi ko lang at magagawa ko ay I will never, ever get tired of caring about you. Para sa akin, ikaw ang isa sa pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso—always remember that I will always admire you from afar, and I will still wait for you until the end. Oo na, OA na kung OA! Ika nga sa kantang napakinggan ko:\n\n";
-
+        "Sorry rin, teh, kung kahit na-reject mo na ako, ganito pa rin ang turing ko sa'yo. Kasi naman, since day 1, pangarap kita na maging future wife. Cringe na siguro yung nararamdaman mo habang binabasa mo 'to, teh! I know na I have a lot of things na I need to improve sa sarili ko, and I will do my best para magawa 'yun—syempre una sa lahat para sa akin at para sa'yo. Syempre since sa ngayon wala pa talaga akong stable job, pero loobin nawa by next year, sa tulong ng Diyos, meron na. Tsaka, teh, I will never get tired of caring about you at never akong maiinis sa'yo.\n\n" +
+        "Para sa akin, teh, ikaw ang isa sa pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso—always remember that I will always admire you from afar, and I will still wait for you until the end. Oo na, OA na kung OA! Ika nga sa kantang napakinggan ko:\n\n";
 
     const postSongText =
-
         "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko. Siyempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa Niya palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember that anytime, you can come to me or tell me about the problems you're going through, and I will always listen. Kahit hindi ko man kayang ayusin ang lahat, I can always be here to listen.";
 
-
-    /* =========================================
-       TYPEWRITER
-    ========================================== */
-
     function startTypewriter() {
-
-        const target =
-            document.getElementById(
-                'typewriter-text'
-            );
-
-
-        const cursor =
-            document.getElementById(
-                'typewriter-cursor'
-            );
-
-
+        const target = document.getElementById('typewriter-text');
+        const cursor = document.getElementById('typewriter-cursor');
         let introIndex = 0;
 
-
         function typeIntro() {
-
-            if (
-                introIndex <
-                introText.length
-            ) {
-
-                target.textContent +=
-                    introText.charAt(
-                        introIndex
-                    );
-
-
+            if (introIndex < introText.length) {
+                target.textContent += introText.charAt(introIndex);
                 introIndex++;
-
-
-                setTimeout(
-                    typeIntro,
-                    28
-                );
-
-            }
-
-            else {
-
-                /*
-                 * Show song lyrics.
-                 */
-
-                document.getElementById(
-                    'lyrics-box'
-                ).style.display =
-                    'block';
-
-
-                /*
-                 * Show YouTube video.
-                 */
-
-                document.getElementById(
-                    'yt-player-box'
-                ).style.display =
-                    'block';
-
-
-                /*
-                 * Show fallback link.
-                 */
-
-                document.getElementById(
-                    'youtube-fallback'
-                ).style.display =
-                    'block';
-
-
-                /*
-                 * Pause background music.
-                 */
+                setTimeout(typeIntro, 28);
+            } else {
+                document.getElementById('lyrics-box').style.display = 'block';
+                document.getElementById('yt-player-box').style.display = 'block';
+                document.getElementById('youtube-fallback').style.display = 'block';
 
                 music.pause();
-
                 isPlaying = false;
+                document.getElementById('music-toggle-btn').innerText = '🔇';
+                document.getElementById('music-status').innerText = 'Music Paused for Video 🎥';
 
-
-                document.getElementById(
-                    'music-toggle-btn'
-                ).innerText = '🔇';
-
-
-                document.getElementById(
-                    'music-status'
-                ).innerText =
-                    'Music Paused for Video 🎥';
-
-
-                /*
-                 * Continue letter.
-                 */
-
-                setTimeout(
-                    typePostSong,
-                    1000
-                );
-
+                setTimeout(typePostSong, 1000);
             }
-
         }
-
 
         let postIndex = 0;
 
-
         function typePostSong() {
-
-            if (
-                postIndex <
-                postSongText.length
-            ) {
-
-                target.textContent +=
-                    postSongText.charAt(
-                        postIndex
-                    );
-
-
+            if (postIndex < postSongText.length) {
+                target.textContent += postSongText.charAt(postIndex);
                 postIndex++;
-
-
-                setTimeout(
-                    typePostSong,
-                    28
-                );
-
+                setTimeout(typePostSong, 28);
+            } else {
+                cursor.style.display = 'none';
+                document.getElementById('ending-part').style.display = 'block';
+                document.getElementById('reasons-area').style.display = 'block';
             }
-
-            else {
-
-                cursor.style.display =
-                    'none';
-
-
-                document.getElementById(
-                    'ending-part'
-                ).style.display =
-                    'block';
-
-
-                document.getElementById(
-                    'reasons-area'
-                ).style.display =
-                    'block';
-
-            }
-
         }
 
-
         typeIntro();
-
     }
 
-
-    /* =========================================
-       REASONS
-    ========================================== */
-
     const reasons = [
-
         "Four years na kitang paboritong pagmasdan at i-admire mula sa malayo. ✨",
-
         "Napakaganda mo palagi—sa paningin at sa puso ko. 🌸",
-
         "Kahit feeling mo hagard ka na, teh, maganda ka pa rin sa paningin ko.",
-
         "Lagi lang akong nandito para makinig sa lahat ng problema mo, anytime. 🎧",
-
         "I'll always wait and wish you nothing but the absolute best, kahit ano pa man ang mangyari. ✨",
-
         "Gusto ko ang buong pagkatao mo, teh.",
-
         "Hindi mo man ako gusto, basta alam ko na gusto kita, at wala nang iba."
-
     ];
-
 
     let reasonIndex = 0;
 
-
     function nextReason() {
-
-        const display =
-            document.getElementById(
-                'polaroid-text'
-            );
-
-
-        display.innerText =
-            `"${reasons[reasonIndex]}"`;
-
-
-        reasonIndex =
-            (
-                reasonIndex + 1
-            ) % reasons.length;
-
+        const display = document.getElementById('polaroid-text');
+        display.innerText = `"${reasons[reasonIndex]}"`;
+        reasonIndex = (reasonIndex + 1) % reasons.length;
     }
-
-
-    /* =========================================
-       FALLING HEART GENERATOR
-    ========================================== */
 
     function createHeart() {
-
-        const heart =
-            document.createElement(
-                'div'
-            );
-
-
-        heart.classList.add(
-            'heart-particle'
-        );
-
-
-        heart.innerHTML =
-            '💖';
-
-
-        heart.style.left =
-            Math.random() * 100 + 'vw';
-
-
-        heart.style.animationDuration =
-            Math.random() * 3 + 2 + 's';
-
-
-        heart.style.fontSize =
-            Math.random() * 10 + 15 + 'px';
-
-
-        document.body.appendChild(
-            heart
-        );
-
+        const heart = document.createElement('div');
+        heart.classList.add('heart-particle');
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+        document.body.appendChild(heart);
 
         setTimeout(() => {
-
             heart.remove();
-
         }, 5000);
-
     }
 
+    setInterval(createHeart, 400);
+</script>
 
-    setInterval(
-        createHeart,
-        400
-    );
 </body>
 </html>
