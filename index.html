@@ -500,7 +500,7 @@
             </div>
 
             <div class="youtube-container" id="yt-player-box">
-                <iframe id="yt-iframe" src="https://www.youtube-nocookie.com/embed/s6wXgtEIhCw?rel=0" title="Tantanan - Antonio Bathan" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe id="yt-iframe" src="https://www.youtube-nocookie.com/embed/s6wXgtEIhCw?enablejsapi=1&rel=0" title="Tantanan - Antonio Bathan" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
 
             <div class="youtube-fallback" id="youtube-fallback">
@@ -648,10 +648,13 @@
                 document.getElementById('yt-player-box').style.display = 'block';
                 document.getElementById('youtube-fallback').style.display = 'block';
 
-                music.pause();
-                isPlaying = false;
-                document.getElementById('music-toggle-btn').innerText = '🔇';
-                document.getElementById('music-status').innerText = 'Music Paused for Video 🎥';
+                // Kusang mamamatay ang background music kapag lumabas na ang YouTube video
+                if (isPlaying) {
+                    music.pause();
+                    isPlaying = false;
+                    document.getElementById('music-toggle-btn').innerText = '🔇';
+                    document.getElementById('music-status').innerText = 'Background Music Paused (Playing YouTube Video 🎥)';
+                }
 
                 setTimeout(typePostSong, 1000);
             }
