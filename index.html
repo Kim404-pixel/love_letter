@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Isang Liham Para Sa'yo</title>
+<title>A Special Letter For You</title>
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Special+Elite&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
     * {
@@ -23,13 +23,8 @@
 
     body {
         min-height: 100vh;
-        /* Estilo ng lumang papel / Maria Clara vibe */
-        background-color: #d7ccc8;
-        background-image: 
-            radial-gradient(circle, rgba(121,85,72,0.08) 10%, transparent 10%),
-            radial-gradient(circle, rgba(93,64,55,0.05) 20%, transparent 20%);
-        background-size: 30px 30px;
-        font-family: 'Cormorant Garamond', serif;
+        /* Tunay na lumang papel/parchment background galing sa reference image */
+        background-color: #2b1d0c;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -38,30 +33,47 @@
         position: relative;
     }
 
-    /* Lumang texture overlay para sa papel */
-    body::before {
-        content: "";
+    .heart-particle {
         position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1000&q=80') center/cover;
-        opacity: 0.12;
+        top: -50px;
+        user-select: none;
         pointer-events: none;
-        z-index: 0;
+        z-index: 1;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
     }
 
     .container {
         width: 100%;
-        max-width: 700px;
+        max-width: 650px;
         position: relative;
         z-index: 2;
     }
 
+    /* Istilo ng sobre na parang lumang papel na may sunog ang gilid */
     .envelope-card {
-        background: #f4ecd8;
+        background-color: #d4a373;
+        background-image: radial-gradient(circle, rgba(92, 53, 11, 0.2) 20%, transparent 80%),
+                          url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1000&q=80');
+        background-blend-mode: multiply;
+        background-size: cover;
         padding: 50px 30px;
-        border-radius: 4px;
-        border: 3px double #5d4037;
-        box-shadow: 0 15px 35px rgba(62, 39, 35, 0.3);
+        border-radius: 8px;
+        border: 4px solid #4a2e12;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(58, 33, 11, 0.7);
         text-align: center;
         cursor: pointer;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -69,7 +81,7 @@
 
     .envelope-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(62, 39, 35, 0.4);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 50px rgba(58, 33, 11, 0.8);
     }
 
     .envelope-icon {
@@ -86,52 +98,58 @@
     }
 
     .envelope-title {
-        font-family: 'Cinzel', serif;
-        font-size: 2.2rem;
-        color: #3e2723;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        color: #2b1806;
         margin-bottom: 10px;
-        letter-spacing: 1px;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.4);
     }
 
     .envelope-subtitle {
-        color: #5d4037;
-        font-size: 1.05rem;
+        color: #3b240e;
+        font-size: 0.95rem;
         font-style: italic;
+        font-weight: 600;
     }
 
     .open-btn {
-        margin-top: 25px;
+        margin-top: 20px;
         padding: 12px 35px;
-        font-size: 1.1rem;
-        font-family: 'Cinzel', serif;
-        background: #5d4037;
-        color: #f4ecd8;
-        border: 1px solid #3e2723;
-        border-radius: 2px;
+        font-size: 1.2rem;
+        font-family: 'Playfair Display', serif;
+        background: #4a2e12;
+        color: #f4e3c1;
+        border: 2px solid #2b1806;
+        border-radius: 30px;
         cursor: pointer;
         font-weight: bold;
-        box-shadow: 0 4px 10px rgba(62, 39, 35, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .open-btn:hover {
-        background: #3e2723;
-        transform: scale(1.03);
+        background: #2b1806;
+        transform: scale(1.05);
     }
 
+    /* Mismong papel ng sulat na may lumang background texture */
     .main-card {
         display: none;
-        background: #fdfbf7;
-        padding: 50px 40px;
-        border-radius: 4px;
-        border: 2px solid #8d6e63;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        background-color: #d4a373;
+        background-image: radial-gradient(circle, rgba(92, 53, 11, 0.15) 20%, transparent 80%),
+                          url('https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&w=1000&q=80');
+        background-blend-mode: multiply;
+        background-size: cover;
+        padding: 40px 30px;
+        border-radius: 8px;
+        border: 4px solid #4a2e12;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), inset 0 0 50px rgba(58, 33, 11, 0.8);
         position: relative;
-        line-height: 1.9;
-        color: #2c221e;
+        line-height: 1.8;
+        color: #2b1806;
         text-align: center;
         animation: fadeIn 1s forwards;
-        background-image: linear-gradient(to bottom, rgba(244, 236, 216, 0.4), rgba(253, 251, 247, 0.9));
     }
 
     .music-player {
@@ -139,13 +157,14 @@
         align-items: center;
         justify-content: center;
         gap: 10px;
-        background: #efebe9;
+        background: rgba(244, 227, 193, 0.85);
         padding: 8px 16px;
-        border-radius: 4px;
+        border-radius: 20px;
         margin-bottom: 30px;
-        border: 1px solid #d7ccc8;
+        border: 1px solid #7d572d;
         font-size: 0.9rem;
-        color: #4e342e;
+        color: #4a2e12;
+        font-weight: bold;
     }
 
     .music-btn {
@@ -160,20 +179,34 @@
         transform: scale(1.2);
     }
 
-    .seal-stamp {
-        width: 50px;
-        height: 50px;
-        background: #8b0000;
-        margin: 0 auto 30px auto;
+    .heart {
+        width: 40px;
+        height: 40px;
+        background: #8b2626;
+        margin: 0 auto 35px auto;
+        position: relative;
+        transform: rotate(-45deg);
+        animation: pulse 1.2s infinite;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .heart::before,
+    .heart::after {
+        content: "";
+        width: 40px;
+        height: 40px;
+        background: #8b2626;
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #ffd700;
-        font-family: 'Cinzel', serif;
-        font-weight: bold;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        border: 2px dashed #ffcccb;
+        position: absolute;
+    }
+
+    .heart::before { top: -20px; left: 0; }
+    .heart::after { left: 20px; top: 0; }
+
+    @keyframes pulse {
+        0% { transform: rotate(-45deg) scale(1); }
+        50% { transform: rotate(-45deg) scale(1.1); }
+        100% { transform: rotate(-45deg) scale(1); }
     }
 
     .question-section {
@@ -181,11 +214,13 @@
     }
 
     .question-text {
-        font-family: 'Cinzel', serif;
-        font-size: 1.8rem;
-        color: #4e342e;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.2rem;
+        color: #3a1f0a;
         margin-bottom: 25px;
-        line-height: 1.5;
+        line-height: 1.4;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
     }
 
     .buttons-container {
@@ -200,28 +235,28 @@
 
     .btn {
         padding: 12px 28px;
-        font-size: 1.05rem;
-        font-family: 'Cinzel', serif;
-        border: 1px solid #5d4037;
-        border-radius: 2px;
+        font-size: 1.1rem;
+        font-family: 'Playfair Display', serif;
+        border: 2px solid #2b1806;
+        border-radius: 30px;
         cursor: pointer;
         font-weight: bold;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         white-space: nowrap;
         transition: transform 0.2s ease, background 0.2s ease;
     }
 
     #yes-btn {
-        background: #33691e;
+        background: #274e13;
         color: white;
         z-index: 10;
         transform-origin: center;
     }
 
-    #yes-btn:hover { background: #1b5e20; }
+    #yes-btn:hover { background: #1b360d; }
 
     #no-btn {
-        background: #b71c1c;
+        background: #78281f;
         color: white;
         position: absolute;
         z-index: 20;
@@ -233,37 +268,41 @@
         transition: left 0.3s ease, top 0.3s ease;
     }
 
-    #no-btn:hover { background: #7f0000; }
+    #no-btn:hover { background: #511b15; }
 
     .letter-content-wrapper {
         display: none;
         text-align: left;
         padding-top: 25px;
-        border-top: 1px dashed #a1887f;
+        border-top: 2px dashed #7d572d;
         animation: fadeIn 1.2s forwards;
+        position: relative;
     }
 
     .salutation {
-        font-family: 'Cinzel', serif;
-        font-size: 2rem;
-        color: #4e342e;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2.2rem;
+        color: #3a1f0a;
         margin-bottom: 20px;
     }
 
     .content {
-        font-size: 1.15rem;
-        margin-bottom: 20px;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
         text-align: left;
         white-space: pre-wrap;
-        line-height: 2;
-        font-family: 'Cormorant Garamond', serif;
+        line-height: 1.9;
+        font-family: 'Playfair Display', serif;
+        color: #2b1806;
+        font-weight: 500;
     }
 
     .cursor {
         display: inline-block;
         width: 2px;
         height: 1.1em;
-        background: #4e342e;
+        background: #3a1f0a;
         vertical-align: middle;
         animation: blink 0.7s infinite;
     }
@@ -273,25 +312,48 @@
         50% { opacity: 0; }
     }
 
+    /* Skip Typing Button */
+    .skip-btn {
+        display: inline-block;
+        margin-bottom: 20px;
+        padding: 6px 16px;
+        font-size: 0.85rem;
+        font-family: 'Playfair Display', serif;
+        background: rgba(74, 46, 18, 0.85);
+        color: #f4e3c1;
+        border: 1px solid #2b1806;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .skip-btn:hover {
+        background: #2b1806;
+        transform: scale(1.05);
+    }
+
     .song-lyrics {
         display: none;
-        background: #efebe9;
-        border-left: 3px solid #5d4037;
+        background: rgba(244, 227, 193, 0.85);
+        border-left: 4px solid #78281f;
         padding: 18px;
         margin: 25px 0 20px 0;
         font-style: italic;
         text-align: center;
-        font-size: 1.05rem;
-        color: #3e2723;
-        border-radius: 0 4px 4px 0;
+        font-size: 1rem;
+        color: #3a1f0a;
+        border-radius: 0 8px 8px 0;
         line-height: 1.8;
-        animation: fadeIn 1s forwards;
+        border-top: 1px solid #d4b28c;
+        border-right: 1px solid #d4b28c;
+        border-bottom: 1px solid #d4b28c;
     }
 
     .song-title {
-        font-family: 'Cinzel', serif;
-        font-size: 1.4rem;
-        color: #3e2723;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 1.6rem;
+        color: #78281f;
         margin-bottom: 10px;
         font-style: normal;
     }
@@ -303,11 +365,12 @@
         padding-bottom: 56.25%;
         height: 0;
         margin: 20px 0 15px 0;
-        border-radius: 4px;
+        border-radius: 8px;
         overflow: hidden;
         background: #000;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
         animation: fadeIn 1s forwards;
+        border: 2px solid #4a2e12;
     }
 
     .youtube-container iframe {
@@ -323,84 +386,91 @@
         display: none;
         text-align: center;
         margin-bottom: 25px;
-        font-size: 0.95rem;
-        color: #6d4c41;
+        font-size: 0.9rem;
+        color: #3b240e;
+        font-weight: bold;
     }
 
     .youtube-fallback a {
-        color: #3e2723;
+        color: #78281f;
         font-weight: bold;
-        text-decoration: underline;
+        text-decoration: none;
     }
 
+    .youtube-fallback a:hover { text-decoration: underline; }
+
     .closing {
-        font-family: 'Cinzel', serif;
-        font-size: 1.5rem;
-        color: #4e342e;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #3a1f0a;
         text-align: right;
-        margin-top: 30px;
+        margin-top: 20px;
     }
 
     .signature {
-        font-family: 'Cinzel', serif;
-        font-size: 1.8rem;
-        color: #3e2723;
+        font-family: 'Dancing Script', cursive;
+        font-size: 2.4rem;
+        color: #78281f;
         text-align: right;
         margin-top: 5px;
-        font-style: italic;
+        text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
     }
 
     .reasons-section {
         display: none;
         margin-top: 35px;
         padding-top: 25px;
-        border-top: 1px dashed #a1887f;
+        border-top: 2px dashed #7d572d;
         text-align: center;
         animation: fadeIn 1s forwards;
     }
 
     .reasons-title {
-        font-family: 'Cinzel', serif;
-        font-size: 1.7rem;
-        color: #4e342e;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 2rem;
+        color: #3a1f0a;
         margin-bottom: 15px;
     }
 
     .polaroid-card {
-        background: #fffdf9;
+        background: rgba(244, 227, 193, 0.9);
         padding: 20px 15px;
-        border-radius: 2px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        border: 1px solid #d7ccc8;
+        border-radius: 8px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        border: 2px solid #7d572d;
         margin: 0 auto 15px auto;
         max-width: 400px;
-        min-height: 100px;
+        min-height: 120px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.15rem;
-        color: #3e2723;
+        font-size: 1.1rem;
+        color: #2b1806;
         font-style: italic;
+        font-weight: 600;
         transition: transform 0.3s ease;
     }
 
     .polaroid-card:hover { transform: rotate(-1deg) scale(1.02); }
 
     .next-reason-btn {
-        background: #5d4037;
-        color: #f4ecd8;
+        background: #4a2e12;
+        color: #f4e3c1;
         padding: 10px 22px;
-        border: 1px solid #3e2723;
-        border-radius: 2px;
-        font-size: 1rem;
-        font-family: 'Cinzel', serif;
+        border: 2px solid #2b1806;
+        border-radius: 20px;
+        font-size: 0.95rem;
         cursor: pointer;
-        box-shadow: 0 4px 10px rgba(62, 39, 35, 0.2);
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         transition: background 0.2s ease, transform 0.2s ease;
     }
 
     .next-reason-btn:hover {
-        background: #3e2723;
+        background: #2b1806;
         transform: scale(1.05);
     }
 
@@ -413,64 +483,75 @@
         body { padding: 12px; align-items: flex-start; }
         .container { margin-top: 20px; }
         .envelope-card { padding: 40px 20px; }
-        .envelope-title { font-size: 1.8rem; }
+        .envelope-title { font-size: 2.1rem; }
+        .envelope-icon { font-size: 3.5rem; }
         .main-card { padding: 30px 18px; }
-        .question-text { font-size: 1.5rem; }
+        .music-player { font-size: 0.78rem; padding: 7px 10px; }
+        .question-text { font-size: 1.8rem; }
         .buttons-container { min-height: 150px; gap: 12px; }
-        .btn { padding: 11px 20px; font-size: 0.95rem; }
-        .content { font-size: 1.05rem; }
+        .btn { padding: 11px 20px; font-size: 1rem; }
+        .content { font-size: 0.98rem; line-height: 1.8; }
+        .salutation { font-size: 2rem; }
+        .closing { font-size: 1.5rem; }
+        .signature { font-size: 2rem; }
+        .reasons-title { font-size: 1.7rem; }
+        .polaroid-card { font-size: 1rem; }
     }
 </style>
 </head>
 <body>
 
-<!-- Audio para sa kanta na "Love" ng Wave to Earth -->
 <audio id="bg-music" loop preload="auto">
     <source src="love.mp3" type="audio/mpeg">
     <source src="https://raw.githubusercontent.com/wyndell404-pixel/love_letter/main/love.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-    <!-- Sobre / Panimulang Pahina -->
     <div class="envelope-card" id="envelope-screen" onclick="openEnvelope()">
         <div class="envelope-icon">📜</div>
-        <div class="envelope-title">Isang Liham Para Sa'yo</div>
-        <p class="envelope-subtitle">Pindutin upang buksan ang lumang kasulatan 🎵</p>
-        <button class="open-btn" onclick="event.stopPropagation(); openEnvelope();">Buksan ang Liham</button>
+        <div class="envelope-title">May Sulat Para Sa'yo</div>
+        <p class="envelope-subtitle">Tap to open with background music 🎵</p>
+        <button class="open-btn" onclick="event.stopPropagation(); openEnvelope();">Open Me</button>
     </div>
 
-    <!-- Pangunahing Pahina ng Liham -->
     <div class="main-card" id="main-card">
         <div class="music-player">
             <button class="music-btn" id="music-toggle-btn" onclick="toggleMusic()">🔊</button>
             <span id="music-status">Now Playing: Love - Wave To Earth 🎵</span>
         </div>
 
-        <div class="seal-stamp">JR</div>
+        <div class="heart"></div>
 
         <div class="question-section" id="question-area">
             <div class="question-text">
                 Mamimiss mo ba ako, teh, kung mawawala ako? Haha. ❤️
             </div>
             <div class="buttons-container">
-                <button class="btn" id="yes-btn" onclick="acceptLove()">Oo naman!</button>
-                <button class="btn" id="no-btn" onclick="dodgeNo()" ontouchstart="dodgeNo()">Hindi</button>
+                <button class="btn" id="yes-btn" onclick="acceptLove()">Yes!</button>
+                <button class="btn" id="no-btn" onclick="dodgeNo()" ontouchstart="dodgeNo()">No</button>
             </div>
         </div>
 
         <div class="letter-content-wrapper" id="letter-area">
-            <div class="salutation">Binibini ko,</div>
+            <div class="salutation">Hello, Teh!</div>
             <div class="content">
                 <span id="typewriter-text"></span>
                 <span class="cursor" id="typewriter-cursor"></span>
             </div>
+
+            <!-- Skip Button -->
+            <button class="skip-btn" id="skip-btn" onclick="skipTypewriter()">⏩ Skip Typing</button>
 
             <div class="song-lyrics" id="lyrics-box">
                 <div class="song-title">🎵 Tantanan</div>
                 "Hindi kita tatantanan hangga't<br>
                 Wala pang tan-tan-tanan,<br>
                 Tan-tan-tanan!<br>
-                Sa hirap at ginhawa..."
+                Sa hirap at ginhawa,<br>
+                Sa lungkot at sa ligaya,<br>
+                'Di kita tatantanan,<br>
+                'Di kita tatantanan,<br>
+                Sinta."
             </div>
 
             <div class="youtube-container" id="yt-player-box">
@@ -478,20 +559,20 @@
             </div>
 
             <div class="youtube-fallback" id="youtube-fallback">
-                Nais mo bang mapanood sa YouTube?
-                <a href="https://www.youtube.com/watch?v=s6wXgtEIhCw" target="_blank" rel="noopener noreferrer">I-click dito 🎵</a>
+                Hindi lumabas ang video?
+                <a href="https://www.youtube.com/watch?v=s6wXgtEIhCw" target="_blank" rel="noopener noreferrer">Panoorin ang song sa YouTube 🎵</a>
             </div>
 
             <div id="ending-part" style="display: none;">
-                <div class="closing">Sumasainyo taos-puso,</div>
+                <div class="closing">Salamat sa Diyos at nakilala kita.</div>
                 <div class="signature">Mhiema</div>
             </div>
         </div>
 
         <div class="reasons-section" id="reasons-area">
-            <div class="reasons-title">✨ Mga Dahilan Kung Bakit Ikaw ay Aking Hinahangaan ✨</div>
-            <div class="polaroid-card" id="polaroid-text">I-click ang buton sa ibaba upang mabasa...</div>
-            <button class="next-reason-btn" onclick="nextReason()">Sundan ang Liham 💖</button>
+            <div class="reasons-title">✨ Reasons Why I Admire You ✨</div>
+            <div class="polaroid-card" id="polaroid-text">Click the button below to see...</div>
+            <button class="next-reason-btn" onclick="nextReason()">Show Reason 💖</button>
         </div>
     </div>
 </div>
@@ -517,7 +598,7 @@
             }).catch(() => {
                 isPlaying = false;
                 document.getElementById('music-toggle-btn').innerText = '🔇';
-                document.getElementById('music-status').innerText = 'I-click ang 🔊 upang patugtugin ang musika';
+                document.getElementById('music-status').innerText = 'Click 🔊 to enable music';
             });
         }
     }
@@ -527,14 +608,14 @@
             music.pause();
             isPlaying = false;
             document.getElementById('music-toggle-btn').innerText = '🔇';
-            document.getElementById('music-status').innerText = 'Musika ay Pansamantalang Itinigil';
+            document.getElementById('music-status').innerText = 'Music Paused';
         } else {
             music.play().then(() => {
                 isPlaying = true;
                 document.getElementById('music-toggle-btn').innerText = '🔊';
                 document.getElementById('music-status').innerText = 'Now Playing: Love - Wave To Earth 🎵';
             }).catch(() => {
-                document.getElementById('music-status').innerText = 'I-click ang 🔊 upang patugtugin ang musika';
+                document.getElementById('music-status').innerText = 'Click 🔊 to enable music';
             });
         }
     }
@@ -544,16 +625,16 @@
     let isDodging = false;
 
     const sadMessages = [
-        "Hindi 🥺",
-        "Tiyak ka ba? 💔",
-        "Subukan muli! 😭",
-        "Pindutin ang 'Oo' na lamang! 😜",
-        "Bawal tumanggi! 🥺👉👈",
+        "No 🥺",
+        "Are you sure? 💔",
+        "Try again! 😭",
+        "Click YES na lang! 😜",
+        "Bawal mag-No! 🥺👉👈",
         "Weh, talaga ba? 😂",
-        "Mali ang iyong napindot! 😂",
+        "Mali yang napipindot mo! 😂",
         "Keiiiizzzzzz 😭",
-        "OO NA NGA",
-        "Mag-oo ka na yarn"
+        "YESSSSSSSSSSSSS",
+        "Magyeyes na yarn"
     ];
 
     function dodgeNo() {
@@ -602,13 +683,16 @@
     }
 
     const introText =
-        "Kung nababasa mo na ang liham na ito, natanggap mo na marahil ang munting alaala ko para sa iyo. Marahil ay labis na naman ang aking pagkabahala sapagkat nag-alay ako ng ganitong bagay nang hindi mo naman hinihiling. Siguro ay mapapabulong ka na lamang sa iyong sarili, \"Nababaliw na naman si anteh.\" Patawarin mo ako, binibini.\n\n" +
-        "Apat na taon na ang lumipas simula noong unang kitang masaksihan at nahulog ang aking loob sa iyo. Napakalalim isipin—parang kailan lang. Kaya't nararapat lamang na sambitin, \"Unang araw pa lang, minahal na kita. Bakit ba ganito ang aking nadama?\" Hahaha. Sana ay magustuhan mo ang mumunting handog na ito.\n\n" +
-        "Patawad din kung sa kabila ng iyong pagtanggi ay nananatili ang aking paghanga. Sapagkat simula pa lamang sa simula, ikaw na ang aking pangarap na makasama sa hinaharap. Batid kong marami pa akong kailangang pagbutihin sa aking sarili, at gagawin ko ang lahat ng aking makakaya—una para sa aking sarili, at higit sa lahat para sa iyo. Nawa'y sa tulong ng Maykapal ay maging maayos ang lahat sa mga darating na panahon.\n\n" +
-        "Para sa akin, ikaw ang pinakamagandang dilag na aking nakilala. Tila man ito ay mababaw o labis, nais kong tandaan mo na mananatili akong nagmamahal mula sa malayo, at maghihintay hanggang sa dulo.\n\n";
+        "Kung nababasa mo na 'tong letter na 'to, natanggap mo na siguro yung gift ko sa'yo. Medyo OA na naman ako sa part na 'to kasi nagbigay ako ng ganitong bagay kahit hindi mo naman hiningi. Siguro mapapasabi ka na, \"Nababaliw na naman si anteh.\" Sorry na, teh. Yung time na naging uncomfortable ka na kasama ako, especially noong birthday mo, I'm really sorry for that. Pero ayun, ekis na 'yon. Let's just focus on the present!\n\n" +
+        "Ayun nga, teh, gusto ko lang ibigay 'to kasi, I guess alam mo na rin na umabot na ng four years since noong una kitang nakita at nahulog sa'yo. Napaka-OA man isipin—like, what?! Mapapakanta ka na lang ng, \"Unang araw pa lang, minahal na kita. Bakit ba ganito ang aking nadama?\" Hahaha. So ayun, teh, I really hope you like this.\n\n" +
+        "Sorry rin, teh, kung kahit na-reject mo na ako, ganito pa rin ang turing ko sa'yo. Kasi naman, since day 1, pangarap kita na maging future wife. Cringe na siguro yung nararamdaman mo habang binabasa mo 'to, teh! I know na I have a lot of things na I need to improve sa sarili ko, and i will do my best para magawa 'yun—syempre una sa lahat para sa akin at para sa'yo. Syempre since sa ngayon wala pa talaga akong stable job, pero loobin nawa by next year, sa tulong ng Diyos, meron na. Tsaka, teh, I will never get tired of caring about you at never akong maiinis sa'yo.\n\n" +
+        "Para sa akin, teh, ikaw ang isa sa pinakamagandang babaeng nakilala ko. Corny na kung corny, teh, pero seryoso—always remember that I will always admire you from afar, and I will still wait for you until the end. Oo na, OA na kung OA! Ika nga sa kantang napakinggan ko:\n\n";
 
     const postSongText =
-        "\nBagamat ito ay tila labis sa iyong paningin, ito ang aking taos-pusong panalangin. Nawa'y ingatan ka palagi ng Poong Maykapal, at huwag mong pababayaan ang iyong kalusugan. Tandaan mo na anuman ang oras, maaari kang sumangguni sa akin sa iyong mga dalahin. Bagamat hindi ko man kayang solusyunan ang lahat, narito ako upang makinig.";
+        "\nCringe na kung cringe, teh, pero ito ang isa sa mga tanging panalangin ko. Siyempre, ang kalooban pa rin Niya ang masusunod. Ingatan nawa at samahan nawa Niya palagi, teh, at huwag mong pababayaan ang sarili mo, okay? Always remember that anytime, you can come to me or tell me about the problems you're going through, and I will always listen. Kahit hindi ko man kayang ayusin ang lahat, I can always be here to listen.";
+
+    let typeTimeout;
+    let isTypingSkipped = false;
 
     function startTypewriter() {
         const target = document.getElementById('typewriter-text');
@@ -616,28 +700,31 @@
         let introIndex = 0;
 
         function typeIntro() {
+            if (isTypingSkipped) return;
             if (introIndex < introText.length) {
                 target.textContent += introText.charAt(introIndex);
                 introIndex++;
-                setTimeout(typeIntro, 28);
+                typeTimeout = setTimeout(typeIntro, 28);
             } else {
                 document.getElementById('lyrics-box').style.display = 'block';
                 document.getElementById('yt-player-box').style.display = 'block';
                 document.getElementById('youtube-fallback').style.display = 'block';
 
-                setTimeout(typePostSong, 1000);
+                typeTimeout = setTimeout(typePostSong, 1000);
             }
         }
 
         let postIndex = 0;
 
         function typePostSong() {
+            if (isTypingSkipped) return;
             if (postIndex < postSongText.length) {
                 target.textContent += postSongText.charAt(postIndex);
                 postIndex++;
-                setTimeout(typePostSong, 28);
+                typeTimeout = setTimeout(typePostSong, 28);
             } else {
                 cursor.style.display = 'none';
+                document.getElementById('skip-btn').style.display = 'none';
                 document.getElementById('ending-part').style.display = 'block';
                 document.getElementById('reasons-area').style.display = 'block';
             }
@@ -646,18 +733,36 @@
         typeIntro();
     }
 
+    function skipTypewriter() {
+        isTypingSkipped = true;
+        clearTimeout(typeTimeout);
+
+        const target = document.getElementById('typewriter-text');
+        const cursor = document.getElementById('typewriter-cursor');
+
+        target.textContent = introText + postSongText;
+        cursor.style.display = 'none';
+        document.getElementById('skip-btn').style.display = 'none';
+
+        document.getElementById('lyrics-box').style.display = 'block';
+        document.getElementById('yt-player-box').style.display = 'block';
+        document.getElementById('youtube-fallback').style.display = 'block';
+        document.getElementById('ending-part').style.display = 'block';
+        document.getElementById('reasons-area').style.display = 'block';
+    }
+
     const reasons = [
-        "Apat na taon na kitang paboritong pagmasdan at i-admire mula sa malayo. ✨",
+        "Four years na kitang paboritong pagmasdan at i-admire mula sa malayo. ✨",
         "Napakaganda mo palagi—sa paningin at sa puso ko. 🌸",
-        "Kahit kailan ay nananatili kang kahanga-hanga sa aking paningin.",
-        "Totoo kang tao at hindi nagpapanggap sa harap ng iba. 🎧",
-        "Batid kong may malasakit ka rin kahit hindi mo madalas ipakita. ✨",
-        "Iniibig ko ang buong pagkatao mo.",
-        "Pinapahalagahan ko maging ang iyong pagtatampo o panenermon sa akin.",
-        "Sadyang kahibang-hibang ang pag-ibig ko sa iyo.",
-        "Busilak ang iyong panloob at panlabas na kagandahan.",
-        "Kahit pa ako ay iyong tinanggihan, ikaw pa rin ang aking pipiliin.",
-        "At kung hindi man dumating sa 'kin ang panahon na ako ay mahalin mo rin, asahan mong 'di ako magdaramdam..."
+        "Kahit feeling mo hagard ka na, teh, maganda ka pa rin sa paningin ko.",
+        "Totoo kang tao teh, hindi ka gaya ng ibang tao na pakitang tao lang. 🎧",
+        "I know na you cared for me even though di mo sinasabi. ✨",
+        "Gusto ko ang buong pagkatao mo, teh.",
+        "I appreciete yung pagtataray mo teh kapag may nagagawa o nasasabi akong mali.",
+        "Ang cute mo parin kahit nagtataray ka.",
+        "Maganda ang iyong pagkataong panloob at panlabas.",
+        "I know nereject mo na ko but ikaw parin ang pipiliin ko kahit hindi ako charottt.",
+        "Ika nga sa kanta teh, 'At kung hindi man dumating sa 'kin ang panahon. Na ako ay mahalin mo rin. Asahan mong 'di ako magdaramdam kahit ako ay nasasaktan. Huwag mo lang ipagkait na ikaw ay aking mahalin."
     ];
 
     let reasonIndex = 0;
@@ -667,6 +772,22 @@
         display.innerText = `"${reasons[reasonIndex]}"`;
         reasonIndex = (reasonIndex + 1) % reasons.length;
     }
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart-particle');
+        heart.innerHTML = '💖';
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+        heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+
+    setInterval(createHeart, 400);
 </script>
 
 </body>
